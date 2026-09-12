@@ -26,7 +26,7 @@ Before pushing, confirm the exact target repository and branch with an authentic
 
 ## Recommended workflow shape
 
-Use a protected `production` environment. Trigger CI on pull requests and deploy only on a push to the protected default branch, with an optional manual `workflow_dispatch`. Set least-privilege permissions, for example `contents: read`, and serialize deployments with a concurrency group. Pin third-party actions to an audited commit or exact release tag.
+Use a protected `production` environment. The current workflow runs its build on pull requests and deploys only from an explicitly confirmed manual `workflow_dispatch`. Set least-privilege permissions, for example `contents: read`, and serialize deployments with a concurrency group. Pin third-party actions to an audited commit or exact release tag.
 
 Build gate:
 
@@ -34,32 +34,30 @@ Build gate:
 - uses: actions/checkout@v6
 - uses: actions/setup-node@v6
   with:
-    node-version-file: site/.nvmrc # or the repository's chosen Node version
+    node-version: 22
     cache: npm
-    cache-dependency-path: site/package-lock.json
+    cache-dependency-path: package-lock.json
 - run: npm ci
-  working-directory: site
 - run: npm run check && npm run build
-  working-directory: site
 ```
 
-For All-Inkl, prefer SFTP on port 22 if the hosting plan exposes SSH. All-Inkl documents SFTP for plans with SSH access. If SFTP is unavailable, use explicit FTPS on port 21 with certificate verification enabled. Do not use plain FTP.
+The tested All-Inkl process uses explicit FTPS on port 21 through `SamKirkland/FTP-Deploy-Action`, pinned to commit `110f9186c050f71550953127052e77650219c287`. Its `security: loose` setting is required by the existing All-Inkl endpoint because strict certificate identity verification does not succeed there. This is a documented transport limitation, not a reason to fall back to plain FTP. The action is scoped to the target directory and uses serialized retries for All-Inkl connection limits.
 
 The deployment action must receive:
 
-- local directory: `site/dist/` or the downloaded build artifact
+- local directory: `dist/` or the downloaded build artifact
 - remote directory: `/steepstep.com/`
 - server, username, and password or key from GitHub environment secrets
 - a narrow exclude list for `.git`, `node_modules`, and deployment metadata
-- no remote delete or clean-slate option until a separately approved rollback and backup procedure exists
+- `dangerous-clean-slate: false`; no remote clean-slate operation
 
-`SamKirkland/FTP-Deploy-Action` documents `server-dir`, FTPS protocol selection, and a sync state file. It is a viable FTPS fallback, but the action must be pinned and its exact input behavior tested against an isolated All-Inkl FTP user restricted to the domain directory. For SFTP, use a pinned, maintained action that supports a remote path and does not delete outside it, or invoke the system `sftp` client in a small reviewed script with strict path arguments.
+`SamKirkland/FTP-Deploy-Action` documents `server-dir`, FTPS protocol selection, and a sync state file. The Steepstep workflow follows the already-tested configuration and changes only the local repository root and remote directory.
 
 ## Secret names
 
-Use environment-scoped secrets with names such as `ALLINKL_HOST`, `ALLINKL_USERNAME`, `ALLINKL_PASSWORD` for FTPS, or `ALLINKL_SSH_PRIVATE_KEY` for SFTP. These are names only, not values. Add an environment approval rule before the production deploy job can access them. Never put credentials in YAML, repository files, build output, or logs.
+Use environment-scoped secrets named `FTP_SERVER`, `FTP_USERNAME`, and `FTP_PASSWORD`. These are names only, not values. Add an environment approval rule before the production deploy job can access them. Never put credentials in YAML, repository files, build output, or logs.
 
-All-Inkl states that its servers support explicit FTP over SSL/TLS and that SFTP uses port 22 where SSH access is available. Its FAQ also recommends checking the hosting plan for SFTP availability. Confirm the actual hostname, protocol, port, certificate hostname, FTP user's home directory, and permissions in KAS before implementation.
+All-Inkl states that its servers support explicit FTP over SSL/TLS. Confirm the actual hostname, port 21, FTPS endpoint, FTP user's home directory, and permissions in KAS before implementation. The current workflow intentionally does not use SFTP.
 
 ## Safe rollout and rollback
 
@@ -74,7 +72,7 @@ All-Inkl states that its servers support explicit FTP over SSL/TLS and that SFTP
 - Authenticated access for the `pirateglobal` GitHub account is missing in this environment.
 - Target repository existence, ownership, branch, and Actions permission settings are unverified because GitHub was unreachable from this sandbox.
 - The repository boundary is unresolved: dedicated site repository versus the current Resonance repository with a `site/` working directory.
-- All-Inkl connection details and whether SFTP is enabled are unknown.
+- All-Inkl FTPS connection details and the endpoint's certificate behavior are unknown.
 - Production workflow and secret names do not yet exist.
 - The public site still contains preview/legal/content gates recorded in the website brief. Deployment infrastructure can be prepared, but public launch claims require the approved practice details and legal copy.
 
