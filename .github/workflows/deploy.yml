@@ -84,7 +84,7 @@ jobs:
           cache-dependency-path: package-lock.json
 
       - name: Download verified build artifact
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           name: steepstep-site-${{ github.sha }}
           path: dist
