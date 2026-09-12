@@ -1,0 +1,136 @@
+name: Build and deploy steepstep.com
+
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Type PUBLISH to request the protected production deployment
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: steepstep-production
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Check and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check Astro project
+        run: npm run check
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Upload static artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: steepstep-site-${{ github.sha }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14
+
+  deploy:
+    name: Deploy to All-Inkl via SFTP
+    needs: build
+    if: github.event_name == 'workflow_dispatch' && inputs.publish == 'PUBLISH'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://steepstep.com/
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Download verified build artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: steepstep-site-${{ github.sha }}
+          path: dist
+
+      - name: Validate deployment inputs
+        env:
+          ALLINKL_HOST: ${{ secrets.ALLINKL_HOST }}
+          ALLINKL_USERNAME: ${{ secrets.ALLINKL_USERNAME }}
+          ALLINKL_SSH_PRIVATE_KEY: ${{ secrets.ALLINKL_SSH_PRIVATE_KEY }}
+          ALLINKL_KNOWN_HOSTS: ${{ secrets.ALLINKL_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$ALLINKL_HOST" || { echo "Missing ALLINKL_HOST" >&2; exit 1; }
+          test -n "$ALLINKL_USERNAME" || { echo "Missing ALLINKL_USERNAME" >&2; exit 1; }
+          test -n "$ALLINKL_SSH_PRIVATE_KEY" || { echo "Missing ALLINKL_SSH_PRIVATE_KEY" >&2; exit 1; }
+          test -n "$ALLINKL_KNOWN_HOSTS" || { echo "Missing ALLINKL_KNOWN_HOSTS" >&2; exit 1; }
+          test -d dist || { echo "Build artifact directory is missing" >&2; exit 1; }
+          test -n "$(find dist -type f -print -quit)" || { echo "Build artifact is empty" >&2; exit 1; }
+          if find dist -type l -print -quit | grep -q .; then
+            echo "Refusing to deploy an artifact containing symlinks" >&2
+            exit 1
+          fi
+
+      - name: Install SSH identity and host key
+        env:
+          ALLINKL_SSH_PRIVATE_KEY: ${{ secrets.ALLINKL_SSH_PRIVATE_KEY }}
+          ALLINKL_KNOWN_HOSTS: ${{ secrets.ALLINKL_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          install -m 700 -d "$RUNNER_TEMP/steepstep-ssh"
+          install -m 600 /dev/null "$RUNNER_TEMP/steepstep-ssh/id_ed25519"
+          install -m 600 /dev/null "$RUNNER_TEMP/steepstep-ssh/known_hosts"
+          printf '%s\n' "$ALLINKL_SSH_PRIVATE_KEY" > "$RUNNER_TEMP/steepstep-ssh/id_ed25519"
+          printf '%s\n' "$ALLINKL_KNOWN_HOSTS" > "$RUNNER_TEMP/steepstep-ssh/known_hosts"
+
+      - name: Upload only dist contents
+        env:
+          ALLINKL_HOST: ${{ secrets.ALLINKL_HOST }}
+          ALLINKL_USERNAME: ${{ secrets.ALLINKL_USERNAME }}
+        run: |
+          set -euo pipefail
+          export SFTP_BATCH_MODE=1
+          export SFTP_TARGET='/steepstep.com/'
+          test "$SFTP_TARGET" = '/steepstep.com/' || { echo "Remote target changed" >&2; exit 1; }
+          test "${SFTP_TARGET#${SFTP_TARGET%/}}" = '/' || { echo "Remote target must be absolute" >&2; exit 1; }
+          if printf '%s\n' "$SFTP_TARGET" | grep -Eq '\.\.|[*?]'; then
+            echo "Unsafe remote target" >&2
+            exit 1
+          fi
+          # sftp processes this batch in order and aborts on a failed command.
+          # The local glob is evaluated only after the remote cd succeeds.
+          printf 'cd %s\nlcd %s\nput -r *\n' "$SFTP_TARGET" "$GITHUB_WORKSPACE/dist" |
+            sftp \
+              -b - \
+              -oBatchMode=yes \
+              -oStrictHostKeyChecking=yes \
+              -oUserKnownHostsFile="$RUNNER_TEMP/steepstep-ssh/known_hosts" \
+              -oIdentityFile="$RUNNER_TEMP/steepstep-ssh/id_ed25519" \
+              -oIdentitiesOnly=yes \
+              -P 22 \
+              "$ALLINKL_USERNAME@$ALLINKL_HOST"
+
+      - name: Remove temporary SSH material
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/steepstep-ssh"

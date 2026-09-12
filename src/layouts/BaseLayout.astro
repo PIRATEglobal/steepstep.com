@@ -1,0 +1,30 @@
+---
+interface Props { title?: string; description?: string; }
+const { title = 'Online-Physiotherapie für Sport und Bewegung', description = 'Online-Physiotherapie für Menschen in der Schweiz, die wieder in Bewegung kommen möchten.' } = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
+---
+<!doctype html>
+<html lang="de-CH">
+  <head>
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f3f0e8" />
+    <meta name="robots" content="noindex, nofollow" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_CH" />
+    <meta property="og:title" content={`${title} · steepstep.com`} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`${title} · steepstep.com`} />
+    <meta name="twitter:description" content={description} />
+    <link rel="icon" href="/brand/steepstep-favicon.svg" />
+    <title>{title} · steepstep.com</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+    <slot />
+  </body>
+</html>

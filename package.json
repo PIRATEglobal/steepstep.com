@@ -1,0 +1,16 @@
+{
+  "name": "physio-schweiz-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "check": "astro check",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "astro": "^7.3.0",
+    "typescript": "^5.7.2"
+  }
+}

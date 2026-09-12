@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+const title = 'So funktioniert Online-Physiotherapie';
+const description = 'Vorbereitung, Ersttermin und nächster Schritt: die wichtigsten Antworten zur Online-Physiotherapie in der Schweiz.';
+---
+<BaseLayout title={title} description={description}>
+  <header class="site-header"><div class="wrap header-inner"><a class="wordmark" href="/" aria-label="steepstep.com, Startseite"><img src="/brand/steepstep-mark.svg" alt="" width="32" height="32" /><span>steepstep</span><small>.com</small></a><a class="button" href="/">Zur Startseite</a></div></header>
+  <main id="inhalt" class="article-page wrap">
+    <p class="eyebrow">Vor Ihrem Termin</p>
+    <h1>So funktioniert Online-Physiotherapie.</h1>
+    <p class="article-intro">Sie brauchen keinen besonderen Aufbau. Ein ruhiger Ort, eine stabile Verbindung und ein Gerät mit Kamera und Mikrofon reichen für den Anfang. Im Ersttermin klären wir gemeinsam, ob Video für Ihre Situation geeignet ist.</p>
+    <p class="review-note">Vorschau. Die technischen Details, Buchungsbedingungen und fachliche Prüfung werden vor Veröffentlichung ergänzt.</p>
+    <section class="article-section"><h2>Vor dem Gespräch</h2><ul class="article-list"><li>Wählen Sie einen Raum, in dem Sie ungestört sprechen und sich kurz bewegen können.</li><li>Prüfen Sie Bild, Ton und Verbindung. Halten Sie das Gerät so bereit, dass Sie und ein grösserer Ausschnitt des Raums sichtbar sein können.</li><li>Tragen Sie bequeme Kleidung. Hilfsmittel oder Schuhe, die für Ihr Ziel wichtig sind, dürfen bereitliegen.</li><li>Teilen Sie Ihren Standort in der Schweiz vor dem Termin mit.</li></ul></section>
+    <section class="article-section"><h2>Im Ersttermin</h2><p>Sie erzählen, was passiert ist, was Sie wieder tun möchten und was Sie bisher versucht haben. Wir sprechen über Alltag und Belastung und beobachten nur Bewegungen, die für eine Videobetreuung sicher und sinnvoll sind. Daraus entsteht ein gemeinsamer nächster Schritt.</p></section>
+    <section class="article-section"><h2>Danach</h2><p>Die Empfehlung wird schriftlich festgehalten. Wenn eine weitere Betreuung per Video fachlich passt, werden Umfang, Termine, Rückfragen und Kommunikation vor dem Kauf erklärt. Wenn eine Abklärung vor Ort sinnvoller ist, erfahren Sie das ebenfalls.</p></section>
+    <section class="article-section"><h2>Wenn die Technik ausfällt</h2><p>Die Kontaktmöglichkeit und das Vorgehen bei einer unterbrochenen Verbindung werden Ihnen vor dem Termin mitgeteilt. Bitte buchen Sie keinen Ersatztermin, bevor Sie von uns hören.</p></section>
+    <nav class="article-links" aria-label="Weiterführende Seiten"><a href="/">Zur Startseite</a><a href="/online-physiotherapie-schweiz">Online-Physiotherapie Schweiz</a><a href="/sicherheit-und-datenschutz">Sicherheit und Privatsphäre</a></nav>
+  </main>
+</BaseLayout>
