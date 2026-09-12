@@ -126,7 +126,7 @@ jobs:
             esac
             echo "Uploading $relative"
             curl --fail --silent --show-error \
-              --ftp-ssl --ftp-pasv --insecure \
+              --ssl-reqd --ftp-pasv --insecure \
               --ftp-create-dirs \
               --user "$FTP_USERNAME:$FTP_PASSWORD" \
               --upload-file "$file" \
