@@ -38,3 +38,12 @@ confidence: high
 review_due: 2026-12-12
 
 Green build and security checks do not establish live mail delivery, practitioner credential evidence, canton-specific operating details or the commercial result of pricing. Keep those proof obligations visible in the release ledger, while the public site itself contains no preview or unfinished wording.
+
+## les-allinkl-runtime-fact: All-Inkl production runs PHP 8.5
+type: lesson
+created: 2026-09-12
+status: active
+confidence: high
+review_due: 2026-12-12
+
+All-Inkl has confirmed the Steepstep production server runs PHP 8.5. The contact endpoint incident was caused by the generated secret include and deployment/runtime configuration, not by an unsupported PHP version. Keep diagnosis and release notes focused on the generated file, compatible access rules and live endpoint smoke tests.

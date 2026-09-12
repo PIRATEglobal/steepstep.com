@@ -9,7 +9,7 @@ export default defineConfig({
     },
     server: {
       proxy: {
-        '/api': `http://127.0.0.1:${process.env.STEEPSTEP_PHP_PORT || '8787'}`,
+        '/api': `http://127.0.0.1:${process.env.STEEPSTEP_PHP_PORT || '8788'}`,
       },
     },
   },

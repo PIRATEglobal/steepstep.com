@@ -13,6 +13,7 @@ How to use it: when you learn something durable, a bug and its fix, a project co
 
 - **Condition pages use one distinct local WebP image each.** The image is illustrative movement context with honest alt text and caption, and must not imply a diagnosis, treatment outcome, patient, or clinician identity. Keep the five condition assets in `public/images/conditions/` and recheck Unsplash rights, model, logo, and crop status before final publication.
 - **All-Inkl generated PHP must use valid `declare` syntax.** The live secret include had `declare(strict_types:1);` with a colon, causing a PHP parse error when `ss_secret()` required it and returning HTTP 500. CI must lint and require the generated file before upload. API `.htaccess` files also avoid `Options` directives and use supported access_compat denial rules.
+- **All-Inkl production uses PHP 8.5.** The contact incident was not a PHP-version incompatibility. Diagnose the generated secret include, access rules and live endpoint behavior directly.
 
 - Typed lessons live in [les-clinical-content-needs-evidence](ledger/lessons.md), [les-image-trust-requires-licensing-and-variety](ledger/lessons.md), [les-remote-care-boundary](ledger/lessons.md), and [les-public-release-gates](ledger/lessons.md).
 

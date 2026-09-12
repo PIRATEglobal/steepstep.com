@@ -219,4 +219,11 @@ const { title, intro, steps, tone = 'paper', ariaLabel = title } = Astro.props;
       transform: translateY(-2px);
     }
   }
+  @media (prefers-reduced-motion: no-preference) {
+    .process-diagram.is-visible .process-diagram__index { animation: process-node-in .42s cubic-bezier(.2,.7,.2,1) both; }
+    .process-diagram.is-visible li:nth-child(2) .process-diagram__index { animation-delay: .1s; }
+    .process-diagram.is-visible li:nth-child(3) .process-diagram__index { animation-delay: .2s; }
+    .process-diagram.is-visible li:nth-child(4) .process-diagram__index { animation-delay: .3s; }
+    @keyframes process-node-in { from { opacity: .35; transform: scale(.65); } to { opacity: 1; transform: scale(1); } }
+  }
 </style>

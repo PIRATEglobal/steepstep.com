@@ -7,6 +7,7 @@ export interface Offer {
   intro: string;
   includes: string[];
   note: string;
+  betweenAppointments?: string;
   tone: 'free' | 'assessment' | 'featured' | 'progress';
 }
 
@@ -17,7 +18,7 @@ export const offers: Offer[] = [
     name: 'Orientierungsgespräch',
     price: 'Kostenlos',
     duration: '20 Minuten per Video',
-    intro: 'Der ruhige erste Schritt, um Ihr Anliegen einzuordnen.',
+    intro: 'Sie schildern Ihr Anliegen und Ihr Ziel. Gemeinsam klären wir, ob eine Betreuung per Video für Sie fachlich passt.',
     includes: [
       'Ihr Ziel und Ihre aktuelle Situation besprechen',
       'Klären, ob ein bezahlter Ersttermin sinnvoll ist',
@@ -28,11 +29,11 @@ export const offers: Offer[] = [
   },
   {
     id: 'assessment',
-    label: 'Klarheit',
+    label: 'Ersttermin',
     name: 'Online-Ersttermin',
     price: 'CHF 149',
     duration: '60 Minuten per Video',
-    intro: 'Wir schaffen ein belastbares Bild Ihrer Situation und definieren den nächsten Schritt.',
+    intro: 'Wir ordnen Ihren Verlauf, Ihre Belastung und Ihr Ziel ein. Daraus entsteht ein klarer nächster Schritt, den Sie im Alltag prüfen können.',
     includes: [
       'Verlauf, Belastung, Alltag und Ziel strukturiert besprechen',
       'Geeignete Bewegungen und sportnahe Aufgaben per Video beobachten',
@@ -43,32 +44,34 @@ export const offers: Offer[] = [
   },
   {
     id: 'four-session',
-    label: 'Aufbauen',
+    label: 'Begleitung',
     name: 'Begleitung',
     price: 'CHF 549',
     duration: '4 × 45 Minuten per Video',
-    intro: 'Für ein klar umrissenes Ziel, das Sie mit regelmässigem Üben verfolgen möchten.',
+    intro: 'Sie verfolgen ein konkretes Ziel über mehrere Termine. Wir beobachten Ihre Reaktion, passen die Belastung an und begleiten Sie auch zwischen den Gesprächen per Messenger.',
     includes: [
       'Vier abgestimmte Videotermine',
       'Ein Bewegungsplan, der zu Ihrem Alltag passt',
       'Belastung zwischen den Terminen beobachten und gemeinsam anpassen',
     ],
     note: 'Voraussetzung ist ein passender Online-Ersttermin.',
+    betweenAppointments: 'Messenger für Rückfragen zwischen den Terminen. Zugang erhalten Sie nach Beginn der Begleitung.',
     tone: 'featured',
   },
   {
     id: 'six-session',
-    label: 'Dranbleiben',
+    label: 'Fortschritt',
     name: 'Fortschritt',
     price: 'CHF 749',
     duration: '6 × 45 Minuten per Video',
-    intro: 'Mehr Zeit für einen schrittweisen Aufbau, etwa für die Rückkehr zu Sport oder belastbarer Alltagsbewegung.',
+    intro: 'Mehr Zeit für einen schrittweisen Aufbau, etwa für die Rückkehr zu Sport oder belastbarer Alltagsbewegung. Die nächsten Schritte richten sich nach Ihrer Reaktion, nicht nach einem festen Versprechen.',
     includes: [
       'Sechs abgestimmte Videotermine',
       'Ein Plan mit aufeinander aufbauenden Belastungsschritten',
       'Regelmässige gemeinsame Anpassung anhand Ihrer Reaktion',
     ],
     note: 'Voraussetzung ist ein passender Online-Ersttermin.',
+    betweenAppointments: 'Messenger für Rückfragen zwischen den Terminen. Zugang erhalten Sie nach Beginn der Begleitung.',
     tone: 'progress',
   },
 ];

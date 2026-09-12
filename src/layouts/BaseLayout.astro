@@ -1,8 +1,8 @@
 ---
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-interface Props { title?: string; description?: string; }
-const { title = 'Online-Physiotherapie für Sport und Bewegung', description = 'Online-Physiotherapie für Menschen in der Schweiz, die wieder in Bewegung kommen möchten.' } = Astro.props;
+interface Props { title?: string; description?: string; image?: string; }
+const { title = 'Online-Physiotherapie für Sport und Bewegung', description = 'Online-Physiotherapie für Menschen in der Schweiz, die wieder in Bewegung kommen möchten.', image = 'https://steepstep.com/images/optimized/hero-1400.webp' } = Astro.props;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
 ---
 <!doctype html>
@@ -19,11 +19,11 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
     <meta property="og:locale" content="de_CH" />
     <meta property="og:title" content={`${title} · steepstep.com`} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="https://steepstep.com/images/optimized/hero-1400.webp" />
+    <meta property="og:image" content={image} />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={`${title} · steepstep.com`} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://steepstep.com/images/optimized/hero-1400.webp" />
+    <meta name="twitter:image" content={image} />
     <link rel="icon" href="/brand/steepstep-favicon.svg" />
     <script is:inline type="application/ld+json" set:html={JSON.stringify({"@context":"https://schema.org","@type":"Organization","name":"steepstep","url":"https://steepstep.com","email":"contact@steepstep.com","legalName":"PIRATE GmbH"})} />
     <title>{title} · steepstep.com</title>
@@ -52,6 +52,22 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
         if (!nav?.contains(event.target) && !menu?.contains(event.target)) { closeGroups(); if (nav?.classList.contains('is-open')) closeMenu(); }
       });
       document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { closeMenu(); nav?.querySelectorAll('details[open]').forEach((group) => group.removeAttribute('open')); menu?.focus(); } });
+      const revealTargets = [...new Set([
+        ...document.querySelectorAll('.article-page > .article-section, .article-page > .feature-image, .article-page > .process-diagram'),
+        ...document.querySelectorAll('.process-diagram'),
+      ])];
+      if (revealTargets.length) {
+        document.documentElement.classList.add('reveal-ready');
+        const reveal = (element) => element.classList.add('is-visible');
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+          revealTargets.forEach(reveal);
+        } else {
+          const observer = new IntersectionObserver((entries, currentObserver) => {
+            entries.forEach((entry) => { if (entry.isIntersecting) { reveal(entry.target); currentObserver.unobserve(entry.target); } });
+          }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+          revealTargets.forEach((element) => observer.observe(element));
+        }
+      }
     </script>
   </body>
 </html>

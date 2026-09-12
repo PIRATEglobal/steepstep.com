@@ -2,7 +2,7 @@
 set -euo pipefail
 
 project_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-php_port="${STEEPSTEP_PHP_PORT:-8787}"
+php_port="${STEEPSTEP_PHP_PORT:-8788}"
 astro_port="${ASTRO_PORT:-4322}"
 php_log="${TMPDIR:-/tmp}/steepstep-php-dev.log"
 

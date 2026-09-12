@@ -8,6 +8,12 @@ Scope: Swiss-facing private-pay online physiotherapy, operated by PIRATE GmbH, w
 
 This is a first legal pass, not legal advice. A Swiss-qualified lawyer should review the final text, especially the classification of the clinical relationship, cancellation and refund policy, liability wording, tax/VAT treatment, and cross-border customers.
 
+## Price display and MWST wording
+
+The public offer uses total prices in CHF. The site states: «Alle Preise sind Gesamtpreise in Schweizer Franken. Eine allfällige Mehrwertsteuer ist darin enthalten; zusätzliche Steuern oder Gebühren kommen nicht hinzu.» This avoids claiming that every physiotherapy service is taxable or exempt while making the amount payable clear to a private client. ESTV guidance lists physiotherapists among recognised health professions and distinguishes physiotherapeutic treatment of illness, injury and other physical-health disorders from taxable services aimed at wellbeing or performance. The operator should keep its accounting and service classification aligned with this public end-price promise.
+
+Sources: [ESTV Branchenbroschüre Nr. 20 Gesundheitswesen](https://www.estv.admin.ch/dam/estv/de/dokumente/mwst/publikationen/aMWSTG/mwst-publ-amwstg-540-20-de.pdf.download.pdf/mwst-publ-amwstg-540-20-de.pdf), sections 2.5.2 and 2.6.1; [MWST guidance](https://www.estv.admin.ch/de/mehrwertsteuer).
+
 ## Confirmed legal frame
 
 | Issue | Confirmed point | Consequence for steepstep |

@@ -78,25 +78,25 @@ Die Beschwerdeseiten verwenden nicht nur die Namen der Verletzungen als Keywords
 
 Das ist der entscheidende Unterschied zwischen Evidenzübertragung und Fachwortdekoration.
 
-## Wo Forschung zu stark verdichtet wurde
+## Was seit der ersten Abdeckung umgesetzt wurde
 
 ### 1. Lauf-FAQ
 
-Die Antwort zur Steigerung des Umfangs muss die Entscheidung tragen. Eine gute Antwort nennt mindestens aktuelle Laufdosis, Reaktion während und nach dem Lauf, Folgetag, Alltag und die Regel, zunächst nur eine Stellschraube zu verändern. Die aktuelle Antwort verweist auf Verlauf und Reaktion, überlässt die eigentliche Logik aber dem kostenlosen Gespräch.
+Die Lauf-FAQ nennt inzwischen aktuelle Dosis, Reaktion während und nach dem Lauf, Folgetag, Alltag und die Regel, zunächst nur eine Stellschraube zu verändern. Sie beschreibt auch konkrete Gründe, eine Steigerung zu stoppen und vor Ort abklären zu lassen.
 
-Die Antwort zu leichten Beschwerden braucht die gleiche Präzision. „Manchmal ja“ ist nur dann nützlich, wenn Stabilität, Funktion, Begleitsymptome, Trend und Folgetag folgen. Das ist keine Aufforderung zu einer pauschalen Schmerzskala, sondern eine Erklärung, warum ein Ja/Nein aus der Ferne nicht seriös ist.
+Die Antwort zu leichten Beschwerden ordnet jetzt Stabilität, Funktion, Begleitsymptome, Trend und Folgetag ein. Sie gibt bewusst keine pauschale Ja/Nein-Freigabe.
 
 ### 2. Ski-FAQ
 
-Die Recherche beschreibt Skifahren als Bündel aus Bremsen, Kantenwechsel, Richtungswechsel, Ermüdung und wechselndem Untergrund. Diese Anforderungen stehen teilweise im Fliesstext, aber die FAQ übersetzt sie noch nicht in eine Entscheidung. „Schmerz oder Schwellung“ allein ist zu wenig. Eine tiefere Antwort braucht kontrollierbare und wiederholbare Funktion, den Folgetag sowie die Aussage, dass eine Online-Begleitung keine Pistenfreigabe ersetzt.
+Die Ski-FAQ übersetzt Skifahren als Bündel aus Bremsen, Kantenwechsel, Richtungswechsel, Ermüdung und wechselndem Untergrund in eine Funktionsentscheidung. Sie nennt kontrollierbare und wiederholbare Bewegung, den Folgetag sowie die Grenze, dass Online-Betreuung keine Pistenfreigabe ersetzt.
 
-### 3. Bedingungsseiten
+### 3. Beschwerde-Hub
 
-`/beschwerden/` ist als Hub sinnvoll, aber noch kein eigener Wissensbeitrag. Er sollte entweder einen echten Auswahlrahmen liefern, etwa „Welche Frage soll heute beantwortet werden: Belastung, Rückkehr, Warnzeichen oder Vor-Ort-Abklärung?“, oder weniger prominent bleiben. Ein weiterer dünner Sportartikel würde die Website schwächen.
+`/beschwerden/` funktioniert als Auswahl- und Sicherheitsrahmen. Die fünf Detailseiten tragen die medizinische Tiefe; der Hub verweist auf Belastung, Rückkehr, Warnzeichen und Vor-Ort-Abklärung, ohne einen weiteren dünnen Artikel zu erzeugen.
 
 ### 4. Sport-Hub
 
-Das Diagramm ist gut, weil jeder Schritt eine Entscheidung enthält. Der Sport-Hub bleibt trotzdem auf einer abstrakten Ebene. Die Forschung nennt die Chance im sportnahen Alltag, nicht nur „Sport“ als Kategorie. Konkrete Mini-Beispiele würden die Seite verdichten: beim Laufen Umfang/Tempo/Höhenmeter, beim Skifahren Bremsen und Ermüdung, beim Fussball Beschleunigung/Richtungswechsel, beim Wandern Gefälle und lange Belastung, beim Radfahren Position und Dauer.
+Das Diagramm enthält pro Schritt eine Entscheidung. Der Sport-Hub ergänzt die Kategorie inzwischen um konkrete Anforderungen: Umfang, Tempo und Höhenmeter beim Laufen, Bremsen und Ermüdung beim Skifahren sowie Beschleunigung, Richtungswechsel, Gefälle, Position und Dauer für weitere Sportarten. Die zwei vertieften Sportseiten führen diese Logik weiter.
 
 ### 5. Team- und Vertrauensebene
 
@@ -123,13 +123,13 @@ Die Schwäche ist die ungleiche Informationstiefe der Cluster. Ein Suchsystem ka
 
 Für E-E-A-T bleiben reale Nachweise nötig: benannte Autorin oder Reviewerin, geprüfter Berufstitel, Datum der klinischen Prüfung, reale Schweizer Praxis- und Standortlogik sowie Quellenpflege. Schema-Markup kann diese Nachweise nicht ersetzen. Die aktuelle Zurückhaltung bei unbestätigten Zertifikaten und Erfolgszahlen ist deshalb richtig.
 
-## Top-5-Lücken mit dem grössten Nutzen
+## Verbleibende Lücken mit dem grössten Nutzen
 
-1. **Lauf-FAQ an die Evidenzmatrix angleichen.** Zwei Antworten mit je einem direkten Satz zu Belastungsvariablen, Folgetag, einer Veränderung nach der anderen und konkreten Eskalationszeichen.
-2. **Ski-FAQ als Funktionsentscheidung schreiben.** Bremsen, Kantenwechsel, Richtungswechsel, Ermüdung und Wiederholbarkeit sichtbar machen; keine Online-Freigabe suggerieren.
-3. **Sport-Hub mit fünf echten Belastungsbeispielen ergänzen.** Pro Sport eine Frage, die im Termin beantwortet wird. Das macht die Breite konkret und vermeidet generische Sportprosa.
-4. **Teamnachweis vervollständigen, sobald Fakten vorliegen.** Natalja und jede weitere Fachperson mit geprüftem Titel, Rolle, Reviewdatum und realer Methode. Bis dahin keine stärkeren Credential-Claims ergänzen.
-5. **Kauf- und Betriebssignale synchron halten.** Preise, Paketumfang, Gültigkeit, Absage, Zahlung, Versicherung und Buchungsbestätigung müssen auf `/preise/`, `/agb/`, `/fragen/` und im Kontaktweg dieselbe reale Regel beschreiben.
+1. **Teamnachweis vervollständigen, sobald Fakten vorliegen.** Natalja und jede weitere Fachperson brauchen geprüften Titel, Rolle und Zuständigkeit. Bis dahin bleiben die Aussagen bewusst allgemein.
+2. **Klinische Freigabe dokumentieren.** Die fünf Beschwerdeseiten, FAQs und das illustrative Empfehlungsexempel müssen vor dauerhafter fachlicher Nutzung durch eine benannte qualifizierte Fachperson geprüft werden.
+3. **Kauf- und Betriebssignale synchron halten.** Preise, Paketumfang, Gültigkeit, Absage, Zahlung, Versicherung und Buchungsbestätigung müssen auf `/preise/`, `/agb/`, `/fragen/` und im Kontaktweg dieselbe reale Regel beschreiben.
+4. **Responsive Browserprüfung abschliessen.** Header, CTA, mobile Navigation, Submenu, Diagramme, Paketkarten, Empfehlungsexempel und Formular brauchen die dokumentierten Viewport- und Tastaturchecks.
+5. **Produktionskontakt verifizieren.** Nach der nächsten Veröffentlichung müssen Token, Zugriffsschutz, ungültige Anfragen und kontrollierte Zustellung am echten All-Inkl-Endpunkt geprüft werden.
 
 ## Was intern bleiben sollte
 
@@ -144,7 +144,7 @@ Die folgenden Forschungsbestandteile gehören in die internen Unterlagen, bis Pr
 
 ## Empfohlene Reihenfolge
 
-Die nächste Inhaltsrunde sollte nicht mehr Seiten erzeugen. Sie sollte zuerst die zwei schwachen Sport-FAQs und den Sport-Hub verbessern. Danach folgt ein gezielter nativer Schweizer-Deutsch-Edit aller sichtbaren Antworten, bei dem nur medizinische Entscheidungen mit echter Variablenlogik länger werden. Die rechtlichen und administrativen Seiten bleiben klar und knapp.
+Die nächste Runde sollte keine weiteren Sportseiten erzeugen. Sie sollte die verbleibenden Fachprüfungen, die responsive Browserprüfung und den Produktionskontakt abschliessen. Die rechtlichen und administrativen Seiten bleiben klar und knapp.
 
 Vor einer weiteren Veröffentlichung sind die klinischen Seiten durch eine benannte qualifizierte Fachperson gegen die tatsächliche Leistung zu prüfen. Erst danach sollten Autorenschaft, Reviewdatum, strukturierte Daten und dauerhafte Indexierung weiter ausgebaut werden.
 
@@ -159,4 +159,4 @@ Vor einer weiteren Veröffentlichung sind die klinischen Seiten durch eine benan
 - [`2026-09-live-powerflow-brand-research.md`](../research/switzerland/2026-09-live-powerflow-brand-research.md), überprüfte öffentliche Angaben und Bildrechte-Hinweise.
 - [`2026-09-clinical-editorial-audit.md`](2026-09-clinical-editorial-audit.md), klinische und redaktionelle Gegenprüfung.
 
-**Status: DONE_WITH_CONCERNS.** Die Kernforschung ist sichtbar eingebaut. Die Lauf- und Ski-FAQs sowie die sportartspezifische Konkretheit des Sport-Hubs müssen noch nachgezogen werden, bevor behauptet werden kann, dass jede öffentliche Seite ihre recherchierte Tiefe vollständig einlöst.
+**Status: DONE_WITH_CONCERNS.** Die Lauf- und Ski-FAQs sowie die sportartspezifische Konkretheit des Sport-Hubs sind umgesetzt. Offen bleiben fachliche Eigentümerprüfung, responsive Browserbeweis und der Live-Smoke des korrigierten Kontakt-Endpunkts. Diese Punkte sind Release- und Betriebsnachweise, keine unbemerkten Inhaltslücken.
