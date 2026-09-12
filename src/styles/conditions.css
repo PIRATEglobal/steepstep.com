@@ -1,4 +1,4 @@
-.condition-page { max-width: var(--condition-measure); }
+.condition-page { max-width: var(--outer-measure); }
 .condition-page h1 { max-width: 13ch; }
 .condition-answer { max-width: 48rem; border-left: 2px solid var(--mineral); padding: .25rem 0 .25rem 1.25rem; margin: 2.5rem 0 4rem; }
 .condition-answer span,.condition-label,.condition-stance span { color: var(--mineral); text-transform: uppercase; letter-spacing: .1em; font-size: .7rem; font-weight: 600; }

@@ -28,6 +28,14 @@ $token = $token_payload . '.' . hash_hmac('sha256', $token_payload, $secret);
 check(ss_token_valid($token, $secret, 'contact'), 'valid form token rejected');
 check(!ss_token_valid($token . 'x', $secret, 'contact'), 'tampered form token accepted');
 check(!ss_token_valid($token, 'wrong-secret', 'contact'), 'wrong secret accepted');
+check(!ss_origin_allowed('http://127.0.0.1:4322', ''), 'local origin accepted outside development mode');
+putenv('STEEPSTEP_LOCAL_DEV=1');
+putenv('STEEPSTEP_LOCAL_ORIGIN_PORT=4322');
+check(ss_origin_allowed('http://127.0.0.1:4322', ''), 'development origin rejected');
+putenv('STEEPSTEP_LOCAL_ORIGIN_PORT=4323');
+check(ss_origin_allowed('http://127.0.0.1:4323', ''), 'configured development origin rejected');
+check(!ss_origin_allowed('https://evil.example', ''), 'evil origin accepted in development mode');
+putenv('STEEPSTEP_LOCAL_DEV=0');
 
 $challenge_payload = encode_payload(['a' => 4, 'b' => 7, 'expires' => $now + 600]);
 $challenge = $challenge_payload . '.' . hash_hmac('sha256', $challenge_payload, $secret);
@@ -49,5 +57,15 @@ check(is_string($contact_source), 'contact endpoint could not be read');
 foreach (['HTTP_ORIGIN', 'form_started', "!empty(\$_POST['website'])", 'ss_captcha_valid', 'ss_header_safe', 'ss_rate', "mail('contact@steepstep.com'"] as $guard) {
     check(strpos($contact_source, $guard) !== false, "contact guard missing: {$guard}");
 }
+
+$api_htaccess = file_get_contents(__DIR__ . '/../public/api/.htaccess');
+check(is_string($api_htaccess), 'API access rules could not be read');
+check(strpos($api_htaccess, 'Require all denied') === false, 'incompatible Apache Require rule present');
+check(strpos($api_htaccess, '<FilesMatch "^(form-abuse|form-secret)\\.php$">') !== false, 'protected API files rule missing');
+check(strpos($api_htaccess, 'Deny from all') !== false, 'protected API files are not denied');
+$rate_htaccess = file_get_contents(__DIR__ . '/../public/api/.rate-limit/.htaccess');
+check(is_string($rate_htaccess), 'rate-limit access rules could not be read');
+check(strpos($rate_htaccess, 'Require all denied') === false, 'incompatible rate-limit authorization rule present');
+check(strpos($rate_htaccess, 'Deny from all') !== false, 'rate-limit files are not denied');
 
 echo "Contact security checks passed.\n";

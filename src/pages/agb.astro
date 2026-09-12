@@ -1,0 +1,95 @@
+---
+import { offerPrices, offerPerSession } from '../data/offers';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+
+const title = 'Allgemeine Geschäftsbedingungen';
+const description = 'Allgemeine Geschäftsbedingungen für die private Online-Physiotherapie von steepstep.com, betrieben von PIRATE GmbH.';
+---
+
+<BaseLayout title={title} description={description}>
+  <main id="inhalt" class="article-page wrap">
+    <p class="eyebrow">Rechtliches</p>
+    <h1>Allgemeine Geschäftsbedingungen.</h1>
+    <p class="article-intro">Diese Bedingungen gelten für die private Online-Physiotherapie von steepstep.com. Sie erklären in klarer Form, was Sie buchen, wie eine Vereinbarung zustande kommt und was gilt, wenn sich ein Termin verschiebt.</p>
+    <p class="review-note">Stand: 12. September 2026</p>
+
+    <section class="article-section">
+      <h2>1. Anbieter und Geltungsbereich</h2>
+      <p>Das Angebot wird betrieben von <strong>PIRATE GmbH</strong>, Brabanter Str. 53, 50672 Köln, Deutschland, E-Mail <a href="mailto:contact@steepstep.com">contact@steepstep.com</a>. Die vollständigen Angaben finden Sie im <a href="/impressum">Impressum</a>.</p>
+      <p>Diese Allgemeinen Geschäftsbedingungen gelten für die Buchung und Durchführung der auf steepstep.com beschriebenen privaten Online-Physiotherapie. Das Angebot richtet sich derzeit an Personen, die sich für den Termin in der Schweiz befinden und die Leistungen selbst bezahlen. Eine Kostenübernahme durch die Grundversicherung ist nicht Bestandteil des Angebots.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>2. Was steepstep anbietet</h2>
+      <p>steepstep begleitet Sie per Video bei Beschwerden und Fragen rund um Bewegung, Sport und Belastbarkeit. Die Begleitung umfasst das gemeinsame Gespräch, die fachliche Einordnung, die Beobachtung geeigneter Bewegungen und einen Plan für die nächsten Schritte. Die konkrete Leistung ergibt sich aus der von Ihnen gewählten Option und der persönlichen Terminbestätigung.</p>
+      <p>Das kostenlose Orientierungsgespräch dauert 20 Minuten. Es ist unverbindlich und dient der ersten Einordnung sowie der Frage, ob ein bezahlter Ersttermin fachlich sinnvoll ist. Es ist keine Untersuchung, Diagnose oder Notfallversorgung.</p>
+      <p>Der Online-Ersttermin dauert 60 Minuten und kostet {offerPrices.assessment}. Die weitere Begleitung bieten wir aktuell als Paket an: vier Termine à 45 Minuten für {offerPrices.fourSession} oder sechs Termine à 45 Minuten für {offerPrices.sixSession}. Die Pakete enthalten die Videotermine, die gemeinsame Planung und die Anpassung der vereinbarten Belastung. Es gibt keine automatische Verlängerung.</p>
+      <p>Online-Physiotherapie ist nicht für jede Situation geeignet. Wenn eine körperliche Untersuchung, Bildgebung, dringende Abklärung oder Behandlung vor Ort sicherer ist, können wir die Betreuung ablehnen, pausieren oder beenden und Ihnen empfehlen, eine geeignete lokale Fachstelle aufzusuchen. Bei einem medizinischen Notfall wählen Sie in der Schweiz die Nummer 144.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>3. Voraussetzungen für einen Videotermin</h2>
+      <p>Sie benötigen eine stabile Internetverbindung, ein Gerät mit Kamera und Mikrofon sowie einen Ort, an dem Sie ungestört sprechen und sich sicher bewegen können. Bitte teilen Sie uns mit, wo Sie sich zum Termin befinden. Diese Angabe hilft uns, die fachliche und örtliche Eignung der Online-Betreuung einzuschätzen.</p>
+      <p>Sie entscheiden selbst, welche Bewegungen Sie zeigen. Führen Sie nur Aufgaben aus, die sich sicher anfühlen, und sagen Sie sofort, wenn sich Beschwerden deutlich verändern. Wir passen die Betreuung an Ihre Rückmeldung an.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>4. Anfrage, Buchung und Vertragsschluss</h2>
+      <p>Die Informationen auf der Website sind eine Einladung, eine Leistung anzufragen. Eine Nachricht über das Kontaktformular oder per E-Mail ist noch keine verbindliche Buchung und kein Kaufvertrag.</p>
+      <p>Für eine bezahlte Leistung wählen Sie zunächst die gewünschte Option. Vor Ihrer verbindlichen Zusage teilen wir Ihnen Dauer, Preis, Umfang, Termin, Zahlungsweg und die Regeln für Absage oder Umbuchung mit. Sie können Ihre Angaben prüfen und korrigieren. Die Buchungsbestätigung nennt die für Ihren Termin vorgesehene Fachperson und deren berufliche Bezeichnung. Der Vertrag kommt zustande, sobald Sie die von uns mitgeteilten Buchungsdaten bestätigen und wir Ihnen den Termin sowie die Leistung in Textform bestätigen. Sie erhalten die für Ihre Buchung geltende Fassung dieser Bedingungen zusammen mit der Bestätigung.</p>
+      <p>Das Orientierungsgespräch wird ebenfalls persönlich bestätigt. Es bleibt kostenlos und unverbindlich, auch wenn danach kein Ersttermin folgt.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>5. Preise und Zahlung</h2>
+      <p>Es gelten die Preise, die Ihnen vor der verbindlichen Buchung in Schweizer Franken mitgeteilt werden. Der vor der Buchung ausgewiesene Betrag ist der für Ihre Buchung geschuldete Gesamtbetrag. Zur Orientierung sind dies aktuell {offerPrices.assessment} für den 60-minütigen Online-Ersttermin, {offerPrices.fourSession} für vier 45-minütige Begleittermine und {offerPrices.sixSession} für sechs 45-minütige Begleittermine. Das 20-minütige Orientierungsgespräch ist kostenlos.</p>
+      <p>Der Zahlungsweg und der Zeitpunkt der Zahlung werden vor der verbindlichen Zusage mitgeteilt. Bei einer Rechnung ist die Zahlungsfrist auf der Rechnung angegeben. Die Buchung bleibt auch bei einer Rechnung nach der Bestätigung verbindlich; die Zahlungspflicht richtet sich nach der angegebenen Frist. Eine Versicherung kann sich je nach Police an den Kosten beteiligen. Bitte klären Sie dies vor dem Kauf direkt mit Ihrer Versicherung. Wir versprechen keine Erstattung.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>6. Pakete und Gültigkeit</h2>
+      <p>Ein Paket umfasst die auf der Buchungsbestätigung genannte Anzahl an Videoterminen. Es ist ab dem Kauf sechs Monate gültig. Wenn wir in diesem Zeitraum keine passenden Termine anbieten können oder eine medizinisch begründete Pause vereinbart wird, verlängern wir die Gültigkeit um mindestens zwei Monate oder um die Dauer der Verhinderung, wenn diese länger ist.</p>
+      <p>Ein Paket kann nicht auf eine andere Person übertragen werden. Nicht genutzte Termine verfallen erst nach Ablauf der Gültigkeit. Eine Verlängerung aus einem wichtigen Grund besprechen wir frühzeitig per E-Mail.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>7. Absage, Umbuchung und Rückerstattung</h2>
+      <p>Sie können einen Termin bis 24 Stunden vorher kostenlos absagen oder verschieben. Bei einer späteren Absage oder einem nicht wahrgenommenen Termin können wir den Termin als bezogen beziehungsweise erbracht behandeln. Der Abzug ist auf den Preis des betroffenen Termins begrenzt: {offerPrices.assessment} beim Online-Ersttermin, {offerPerSession.fourSession} bei einem Termin aus dem Viererpaket und {offerPerSession.sixSession} bei einem Termin aus dem Sechserpaket. Keine solche Belastung fällt an, wenn Sie wegen Krankheit, eines Notfalls oder eines anderen wichtigen Grundes nicht teilnehmen können oder wir den Termin noch anderweitig vergeben können. Melden Sie sich in jedem Fall so früh wie möglich.</p>
+      <p>Wenn Sie ein Paket beenden möchten, erstatten wir nicht genutzte Termine. Wir ziehen dabei die bereits erbrachten Termine zum jeweils anteiligen Paketpreis sowie höchstens den oben genannten Preis für einen nicht rechtzeitig abgesagten Termin ab. Weitere pauschale oder nicht ausgewiesene Gebühren verlangen wir nicht. Eine automatische Verlängerung findet nicht statt.</p>
+      <p>Wenn wir die Online-Betreuung beenden müssen, weil sie für Ihre Situation nicht geeignet ist, erstatten wir die nicht genutzten Termine. Gesetzliche Ansprüche bleiben vorbehalten.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>8. Unterbrechungen und technische Probleme</h2>
+      <p>Kann ein Termin wegen eines Problems bei steepstep oder bei der vereinbarten Videoplattform nicht sinnvoll durchgeführt werden, holen wir ihn ohne zusätzliche Kosten nach oder erstatten den betroffenen Termin. Bei einem Problem auf Ihrer Seite versuchen wir, aktive Kundinnen und Kunden über den vorab vereinbarten, geschützten Kommunikationsweg zu erreichen und stimmen das weitere Vorgehen fair mit Ihnen ab.</p>
+      <p>Eine vorübergehende technische Unterbrechung ändert nichts an Ihren gesetzlichen Rechten. Bitte buchen Sie nach einer abgebrochenen Sitzung keinen Ersatztermin, bevor wir das weitere Vorgehen bestätigt haben.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>9. Mitwirkung und persönliche Ergebnisse</h2>
+      <p>Physiotherapie ist ein gemeinsamer Prozess. Ihre Rückmeldungen, Ihre aktive Teilnahme und die Umsetzung der vereinbarten Schritte beeinflussen den Verlauf. Wir arbeiten fachlich sorgfältig, versprechen aber keinen bestimmten Heilungsverlauf, keine bestimmte Beschwerdefreiheit und keinen festen Zeitpunkt für die Rückkehr zum Sport.</p>
+      <p>Nichts in diesen Bedingungen schliesst die Haftung für Vorsatz, grobe Fahrlässigkeit, Schäden an Leben, Körper oder Gesundheit oder eine andere Haftung aus, die gesetzlich nicht ausgeschlossen werden darf.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>10. Vertraulichkeit und Datenschutz</h2>
+      <p>Informationen aus der persönlichen Betreuung behandeln wir vertraulich im Rahmen der anwendbaren gesetzlichen und beruflichen Regeln. Welche Personendaten wir zu welchem Zweck bearbeiten, welche Dienstleister beteiligt sind und welche Rechte Sie haben, erklärt die <a href="/datenschutz">Datenschutzerklärung</a>.</p>
+      <p>Das allgemeine Kontaktformular ist für organisatorische Fragen gedacht. Bitte senden Sie dort keine Diagnosen, Symptome, Befunde, Behandlungsgeschichte oder andere Gesundheitsdaten. Für Gesundheitsdaten ist ein geeigneter, mit Ihnen vereinbarter Kommunikationsweg erforderlich.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>11. Änderungen, Beendigung und Beschwerden</h2>
+      <p>Für eine bestätigte Buchung gilt die Fassung, die Sie mit der Buchungsbestätigung erhalten. Wir können diese Bedingungen für zukünftige Buchungen anpassen. Eine bereits vereinbarte Leistung, ein Preis oder ein Paketumfang wird dadurch nicht einseitig verändert.</p>
+      <p>Beide Seiten können eine laufende Begleitung aus wichtigem Grund beenden. Bereits erbrachte und noch offene Leistungen werden transparent abgerechnet. Wenn Sie eine Frage oder Beschwerde haben, schreiben Sie an <a href="mailto:contact@steepstep.com">contact@steepstep.com</a>. Wir prüfen Ihr Anliegen und antworten so rasch wie möglich.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>12. Anwendbares Recht und Gerichtsstand</h2>
+      <p>Für Verträge mit Kundinnen und Kunden in der Schweiz gilt Schweizer Recht. Zwingende Schutzvorschriften des Staates, in dem Sie Ihren gewöhnlichen Aufenthalt haben, bleiben anwendbar, soweit sie Ihnen einen weitergehenden Schutz gewähren.</p>
+      <p>Für Verbraucherinnen und Verbraucher gelten die gesetzlichen Gerichtsstände. Insbesondere bleibt das Recht unberührt, eine Klage am eigenen Wohnsitz oder am Sitz von PIRATE GmbH einzureichen. Eine Vereinbarung in diesen Bedingungen schränkt zwingende Rechte oder gesetzliche Gerichtsstände nicht ein.</p>
+    </section>
+
+    <nav class="article-links" aria-label="Rechtliche Seiten"><a href="/preise">Preise und Pakete</a><a href="/kontakt">Kontakt</a><a href="/datenschutz">Datenschutz</a><a href="/impressum">Impressum</a></nav>
+  </main>
+</BaseLayout>

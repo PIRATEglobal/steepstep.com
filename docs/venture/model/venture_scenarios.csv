@@ -1,0 +1,4 @@
+scenario,price,CAC,refund_pct,repeat_rate,clinician_hours,first_contribution,repeat_contribution,cohort_contribution,ltv_after_2_repeats,ltv_cac,payback_packages,capacity_packages_per_clinician_month,break_even_packages_month
+downside,349,140,0.1,0.15,4.5,-211.63,8.87,-202.76,-202.56,-1.45,140.0,24.1,inf
+base,449.0,70.0,0.05,0.3,4.0,55.07,27.47,82.54,85.01,1.21,0.85,27.1,36.3
+upside,549,55,0.03,0.45,3.25,246.55,47.95,294.5,304.21,5.53,0.19,33.3,10.2

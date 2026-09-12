@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProcessDiagram from './ProcessDiagram.astro';
 import '../styles/global.css';
 import '../styles/conditions.css';
 
@@ -47,7 +48,7 @@ const faqSchema = p.faqs.map((faq) => ({ '@type': 'Question', name: faq.q, accep
     <section class="article-section"><p class="section-meta">Was dahinterstecken kann</p><h2>Wir ordnen Beschwerden ein, ohne aus der Ferne zu diagnostizieren.</h2><p>{p.approach}</p></section>
     <section class="article-section condition-video"><p class="section-meta">Video und Bewegung</p><h2>{framing.video}</h2><p>{p.video}</p></section>
 
-    <section class="article-section"><p class="section-meta">Beispiel für den Aufbau</p><h2>{framing.progression}</h2><p class="condition-note">Beispiel, individuell angepasst. Die Phasen zeigen die Logik einer Begleitung. Sie ersetzen keine Untersuchung und sind keine persönliche Übungsempfehlung.</p><div class="condition-phases">{p.phases.map((phase) => <article><span>{phase.name}</span><h3>{phase.focus}</h3><p>{phase.marker}</p></article>)}</div></section>
+    <section class="article-section"><p class="section-meta">Beispiel für den Aufbau</p><p class="condition-note">Beispiel, individuell angepasst. Die Phasen zeigen die Logik einer Begleitung. Sie ersetzen keine Untersuchung und sind keine persönliche Übungsempfehlung.</p><ProcessDiagram title={framing.progression} intro="Die Fachperson passt Aufgabe und Dosis an Ihren Verlauf an." ariaLabel={`Beispielhafter Aufbau bei ${p.title}`} steps={p.phases.map((phase) => ({ label: phase.name, title: phase.focus, text: phase.marker }))} /></section>
 
     <section class="article-section condition-safety"><p class="section-meta">Sicherheit zuerst</p><h2>{framing.safety}</h2><ul>{p.safety.map((item) => <li>{item}</li>)}</ul><p>Bei akuten oder starken Beschwerden wenden Sie sich an eine lokale medizinische Fachstelle. Das kostenlose Orientierungsgespräch ist kein Notfalldienst.</p></section>
 
@@ -55,7 +56,7 @@ const faqSchema = p.faqs.map((faq) => ({ '@type': 'Question', name: faq.q, accep
 
     <section class="article-section"><p class="section-meta">Häufig gefragt</p><div class="faq-list">{p.faqs.map((faq, i) => <details open={i === 0}><summary>{faq.q}</summary><p>{faq.a}</p></details>)}</div></section>
 
-    <section class="article-section condition-sources"><p class="section-meta">Quellen und Einordnung</p><p>Redaktionell geprüft am 12. September 2026. Die Aussagen fassen die folgenden Leitlinien und Übersichten zusammen. Sie sind keine individuelle medizinische Beratung.</p><ul>{p.sources.map((source) => <li><a href={source.url} rel="noreferrer">{source.label}</a> <span>{source.date}</span></li>)}</ul></section>
+    <section class="article-section condition-sources"><p class="section-meta">Weiterführende Quellen</p><p>Wir haben diese Quellen bei der fachlichen Arbeit zu den Themen auf dieser Seite berücksichtigt. Sie vertiefen einzelne Aspekte, ersetzen aber keine persönliche Einschätzung.</p><ul>{p.sources.map((source) => <li><a href={source.url} rel="noreferrer">{source.label}</a> <span>{source.date}</span></li>)}</ul></section>
     <nav class="article-links" aria-label="Weiterführende Seiten"><a class="button" href="/kontakt">Kostenloses Orientierungsgespräch</a>{p.related.map((link) => <a href={link.href}>{link.label}</a>)}</nav>
   </main>
   <script is:inline type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'MedicalWebPage', name: p.title, description: p.description, url: Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined, dateModified: '2026-09-12', isPartOf: { '@type': 'WebSite', name: 'steepstep.com', url: 'https://steepstep.com' }, mainEntity: faqSchema })} />

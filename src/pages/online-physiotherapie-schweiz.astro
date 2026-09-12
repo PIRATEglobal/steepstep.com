@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProcessDiagram from '../components/ProcessDiagram.astro';
+import OfferSummary from '../components/OfferSummary.astro';
 import '../styles/global.css';
 const title = 'Online-Physiotherapie in der Schweiz';
 const description = 'Was Online-Physiotherapie in der Schweiz leisten kann, wie der Ersttermin abläuft und wann eine Untersuchung vor Ort sinnvoll ist.';
@@ -9,12 +11,21 @@ const description = 'Was Online-Physiotherapie in der Schweiz leisten kann, wie 
     <p class="eyebrow">Schweizer Online-Physiotherapie</p>
     <h1>Was Online-Physiotherapie in der Schweiz leisten kann.</h1>
     <p class="article-intro">Online-Physiotherapie bedeutet ein Gespräch per Video, eine gemeinsame Einordnung Ihrer Situation und einen nächsten Schritt, den Sie im Alltag umsetzen können. Ob diese Form für Sie passt, entscheidet die Fachperson im Ersttermin. Eine Untersuchung oder Behandlung vor Ort kann dadurch nicht in jeder Situation ersetzt werden.</p>
+    <ProcessDiagram title="Vom ersten Gespräch zum nächsten Schritt" intro="Jede Phase beantwortet eine andere Frage. Erst wenn die Einordnung trägt, wird aus einem Gespräch eine Begleitung." steps={[{label:'Orientierung',title:'Passt Video?',text:'Sie schildern Ihr Anliegen. Wir klären gemeinsam, ob ein bezahlter Ersttermin sinnvoll ist.'},{label:'Ersttermin',title:'Situation verstehen',text:'Verlauf, Belastung und Ziel werden geordnet. Geeignete Bewegungen können wir per Video beobachten.'},{label:'Plan',title:'Nächste Dosis wählen',text:'Sie erhalten einen überprüfbaren Schritt für Alltag oder Sport und wissen, worauf Sie achten.'},{label:'Begleitung',title:'Reaktion prüfen',text:'Wenn Video fachlich passt, wird die Belastung zwischen den Terminen angepasst.'}]} />
     <p class="review-note">Online-Physiotherapie eignet sich nicht für jede Situation. Die Fachperson prüft Ihre Eignung im Ersttermin.</p>
     <section class="article-section"><h2>Wie läuft ein Online-Ersttermin ab?</h2><p>Sie schildern Beschwerden, Verlauf, Belastung und Ihr Ziel. Danach sprechen Sie mit der Fachperson über Bewegungen, die sich sicher und sinnvoll beobachten lassen. Sie erhalten eine schriftliche Empfehlung für den nächsten Schritt. Wenn eine Untersuchung vor Ort oder eine ärztliche Beurteilung nötig ist, wird das klar benannt.</p></section>
     <section class="article-section"><h2>Für wen kann die Betreuung passen?</h2><p>Video kann sinnvoll sein, wenn Sie Ihre Situation gut beschreiben können, ein klarer Bewegungs- oder Sportbezug besteht und die Fachperson Ihre nächsten Schritte aus der Distanz sicher begleiten kann. Das ist eine Einzelfallentscheidung. Die Eignung lässt sich nicht allein aus einer Diagnose oder einem kurzen Fragebogen ableiten.</p></section>
     <section class="article-section"><h2>Wann ist eine Abklärung vor Ort besser?</h2><p>Wenn die Situation eine körperliche Untersuchung, eine Behandlung vor Ort oder eine dringende medizinische Beurteilung verlangt, ist Online-Betreuung nicht der passende Weg. Bei akuten Notfällen wählen Sie in der Schweiz 144. Bei Unsicherheit wenden Sie sich an eine lokale medizinische Fachstelle.</p></section>
     <section class="article-section"><h2>Was brauche ich?</h2><p>Ein Gerät mit Kamera und Mikrofon, eine stabile Verbindung, einen ruhigen Raum und etwas Platz für sichere Bewegungen. Teilen Sie Ihren Aufenthaltsort mit, weil die Betreuung auf Personen in der Schweiz ausgerichtet ist. Termine werden standardmässig nicht aufgezeichnet.</p></section>
-    <section class="article-section"><h2>Was kostet es?</h2><p>Das 20-minütige Orientierungsgespräch ist kostenlos und unverbindlich. Der 60-minütige Online-Ersttermin kostet CHF 149. Wenn danach eine Begleitung fachlich passt, wählen Sie vier Termine à 45 Minuten für CHF 549 oder sechs Termine à 45 Minuten für CHF 749. Alle Preise gelten für Selbstzahlerinnen und Selbstzahler. Eine Zusatzversicherung kann sich je nach Police beteiligen. Klären Sie die Kostenübernahme direkt mit Ihrer Versicherung.</p><p><a class="text-link" href="/preise">Preise und Pakete im Detail <span aria-hidden="true">↗</span></a></p></section>
+    <section class="article-section"><h2>Was kostet es?</h2><p>Das 20-minütige Orientierungsgespräch ist kostenlos und unverbindlich. Die vier Optionen sehen Sie hier auf einen Blick. Alle Preise gelten für Selbstzahlerinnen und Selbstzahler. Eine Zusatzversicherung kann sich je nach Police beteiligen. Klären Sie die Kostenübernahme direkt mit Ihrer Versicherung.</p><OfferSummary variant="compact" class="online-offers" /><p><a class="text-link" href="/preise">Preise und Pakete im Detail <span aria-hidden="true">↗</span></a></p></section>
     <nav class="article-links" aria-label="Weiterführende Seiten"><a href="/">Zur Startseite</a><a href="/sicherheit-und-datenschutz">Sicherheit und Privatsphäre</a><a href="/fragen">Fragen</a></nav>
+    <section class="article-section"><h2>Was Sie aus dem 60-Minuten-Termin mitnehmen</h2><div class="visit-outputs"><article><span>Ein gemeinsames Bild</span><p>Was passiert ist, welche Belastung wichtig ist und welche Frage wir beantworten können.</p></article><article><span>Eine klare Grenze</span><p>Was per Video sinnvoll ist und wann eine lokale Untersuchung der bessere Weg bleibt.</p></article><article><span>Ein nächster Schritt</span><p>Eine überprüfbare Bewegung oder Belastung, die zu Ihrem Alltag und Ihrem Ziel passt.</p></article></div></section>
   </main>
 </BaseLayout>
+<style>
+  .visit-outputs { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:2rem; background:var(--line); border:1px solid var(--line); }
+  .visit-outputs article { background:var(--paper); padding:1.25rem; min-height:10rem; }
+  .visit-outputs span { color:var(--mineral); font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; }
+  .visit-outputs p { color:var(--ink-soft); font-size:.92rem; margin:1.25rem 0 0; }
+  @media (max-width:800px) { .visit-outputs { grid-template-columns:1fr; } .visit-outputs article { min-height:auto; } }
+</style>

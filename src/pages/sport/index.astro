@@ -1,11 +1,23 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProcessDiagram from '../../components/ProcessDiagram.astro';
 import '../../styles/global.css';
 ---
 <BaseLayout title="Sport und Bewegung" description="Online-Physiotherapie für Laufen und Skifahren in der Schweiz.">
 <main id="inhalt" class="wrap article-page sport-hub"><p class="eyebrow">Sport &amp; Bewegung</p><h1>Ihre Bewegung gibt die Richtung vor.</h1><p class="article-intro">Wir arbeiten mit Menschen, die ihre sportliche Belastung wieder aufnehmen möchten. Wählen Sie Laufen oder Skifahren, wenn einer dieser Bereiche Ihrem Ziel am nächsten ist.</p>
 <figure class="feature-image feature-image--wide"><img src="/images/optimized/movement-1200.webp" width="1200" height="800" loading="eager" alt="Person in Sportkleidung in einer hellen Umgebung" /><figcaption>Bewegung beginnt mit Aufmerksamkeit. Quelle: Powerflow with Natty.</figcaption></figure>
-<section class="article-section"><h2>Womit möchten Sie wieder anfangen?</h2><div class="sport-links"><a href="/sport/laufen"><span>Laufen</span><small>Belastung und Rhythmus</small></a><a href="/sport/skifahren"><span>Skifahren</span><small>Vorbereitung auf die Piste</small></a></div></section>
+<section class="article-section"><h2>Womit möchten Sie wieder anfangen?</h2><div class="sport-links"><a href="/sport/laufen"><span>Laufen</span><small>Belastung und Rhythmus</small></a><a href="/sport/skifahren"><span>Skifahren</span><small>Vorbereitung auf die Piste</small></a></div><p class="sport-other">Ihr Sport ist nicht dabei? Auch Fussball, Wandern, Radfahren oder Klettern lassen sich über ihre konkreten Anforderungen besprechen. <a href="/kontakt">Schildern Sie uns Ihr Ziel</a>, damit wir die passende Einordnung wählen können.</p></section>
+<section class="article-section sport-framework"><p class="section-meta">Was wir im Sport anschauen</p><h2>Die Sportart ist die Aufgabe, nicht die Diagnose.</h2><p>Ein Trainingsplan wird brauchbar, wenn er die Anforderungen Ihres Sports trifft. Wir ordnen vier Dinge: Welche Kraft und Beweglichkeit braucht die Bewegung? Wie schnell muss sie stattfinden? Wie lange hält sie unter Müdigkeit? Und wie verändern Untergrund, Richtung oder Höhe die Aufgabe?</p><div class="framework-grid"><article><span>Kraft und Kontrolle</span><p>Drücken, bremsen, landen oder stabilisieren. Wir wählen eine Aufgabe, die zu Ihrem aktuellen Stand passt.</p></article><article><span>Tempo und Richtung</span><p>Ein langsamer Ausfallschritt ist etwas anderes als ein Sprint, Cut oder Kantenwechsel. Geschwindigkeit kommt stufenweise dazu.</p></article><article><span>Dauer und Müdigkeit</span><p>Ein einzelner guter Versuch sagt wenig über eine ganze Sporteinheit. Pausen, Umfang und die Reaktion am Folgetag zählen mit.</p></article><article><span>Untergrund und Umgebung</span><p>Bahn, Trail, Schnee, Steigung oder Halle verändern die Belastung. Wir übersetzen Ihr Ziel in die nächste sichere Aufgabe.</p></article></div></section>
+<ProcessDiagram title="So wird aus Ihrem Sportziel eine nächste Aufgabe" intro="Wir übersetzen die Bewegung nicht in ein allgemeines Programm, sondern in die Anforderungen, die für Sie zählen." steps={[{label:'Anforderung',title:'Was soll wieder gehen?',text:'Laufen, bremsen, springen, klettern oder eine ganze Sportwoche bewältigen.'},{label:'Ausgangslage',title:'Was ist heute möglich?',text:'Wir betrachten Verlauf, aktuelle Belastbarkeit und die Reaktion auf Bewegung.'},{label:'Aufgabe',title:'Was ist der nächste Test?',text:'Eine kontrollierbare sportnahe Bewegung, die Sie sicher durchführen und beobachten können.'},{label:'Anpassung',title:'Was sagt der Folgetag?',text:'Die Reaktion entscheidet, ob Umfang, Tempo oder Pause verändert werden.'}]} />
 <section class="article-section"><h2>Ein Weg, der fachlich passt</h2><p>Sport ist der Kontext. Ihre Situation bleibt der Ausgangspunkt. Im Ersttermin klären wir, was online sicher möglich ist, und empfehlen den nächsten Schritt, auch wenn dieser vor Ort stattfinden sollte.</p><div class="article-links"><a class="button" href="/kontakt">Kostenloses Gespräch anfragen</a><a href="/ueber-uns">Das Team kennenlernen</a></div></section>
 </main>
 </BaseLayout>
+<style>
+  .sport-other { max-width: 42rem; margin-top: 1.5rem; color: var(--ink-soft); }
+  .sport-framework { border-top: 1px solid var(--line); }
+  .framework-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; margin-top:2rem; background:var(--line); border:1px solid var(--line); }
+  .framework-grid article { background:var(--paper); padding:1.4rem; min-height:9rem; }
+  .framework-grid span { color:var(--mineral); font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; }
+  .framework-grid p { margin:.8rem 0 0; }
+  @media (max-width:800px) { .framework-grid { grid-template-columns:1fr; } }
+</style>

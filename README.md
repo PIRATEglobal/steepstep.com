@@ -1,6 +1,6 @@
-# steepstep.com Schweiz, Astro preview
+# steepstep.com Schweiz, Astro
 
-Swiss Standard German (`de-CH`) static preview for the private-pay online physiotherapy offer.
+Swiss Standard German (`de-CH`) static website for the private-pay online physiotherapy offer.
 
 ## Run
 
@@ -11,10 +11,10 @@ npm run build
 npm run dev
 ```
 
-The page is intentionally a preview. It does not collect health data, take payment, or expose a live booking route. Preview pages emit `noindex, nofollow`. The steepstep.com identity is integrated as a working preview identity; trademark, company name, domain ownership, practitioner details, service area, CHF prices and terms, clinical escalation copy, privacy details, real contact details, owned photography, and the approved booking provider still require confirmation before publication.
+The website provides information about private online physiotherapy in Switzerland, clear CHF pricing, a free orientation request, a protected contact form, safety guidance, privacy information, terms, and legal operator details. It does not collect health data through the general contact form or take automated payment. Paid bookings are confirmed personally in text form.
 
-Temporary Unsplash images are illustrative only. Sources are recorded in `../docs/design/assets/unsplash-register.md` and must be rechecked before use.
+Image sources are recorded in `docs/design/assets/unsplash-register.md`.
 
 ## Content map
 
-The home page carries the primary decision journey. Supporting answer pages are available at `/online-physiotherapie-schweiz` and `/so-funktionierts`. Their content is preview material and remains gated by clinical review, verified practitioner details, and final service terms. See `../docs/design/2026-09-depth-implementation.md` for the implementation record and publication backlog.
+The home page carries the primary decision journey. Supporting answer pages are available at `/online-physiotherapie-schweiz`, `/so-funktionierts`, `/sport`, and `/beschwerden`. Legal information is available at `/impressum`, `/datenschutz`, and `/agb`. See `docs/design/2026-09-depth-implementation.md` for the implementation record.

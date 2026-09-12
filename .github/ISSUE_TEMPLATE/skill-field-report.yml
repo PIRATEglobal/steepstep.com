@@ -1,0 +1,49 @@
+name: Skill field report
+description: A Resonance skill behaved differently than its doctrine promises
+title: "[Field report]: "
+labels: ["field-report"]
+body:
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+      description: Which skill or command (e.g. strategy/grill, /plan)
+    validations:
+      required: true
+  - type: input
+    id: host
+    attributes:
+      label: Tool and model
+      description: e.g. Claude Code + Opus, Cursor + GPT
+    validations:
+      required: false
+  - type: textarea
+    id: expected
+    attributes:
+      label: What the skill promises
+      description: The behavior its SKILL.md or description led you to expect
+    validations:
+      required: true
+  - type: textarea
+    id: got
+    attributes:
+      label: What actually happened
+      description: Paste the relevant output or describe the gap
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction context
+      description: Give the smallest safe example that can reproduce the gap. Remove secrets and private project data.
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues for this behavior.
+          required: true
+        - label: I removed secrets and private project data.
+          required: true

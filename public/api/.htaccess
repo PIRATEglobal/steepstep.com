@@ -1,11 +1,11 @@
 Options -Indexes
+# All-Inkl's shared Apache setup uses access_compat syntax for file blocking.
+# The newer Apache authorization directive returns a server error when matched.
 <FilesMatch "^\.">
-  Require all denied
+  Order allow,deny
+  Deny from all
 </FilesMatch>
-<Files "form-abuse.php">
-  Require all denied
-</Files>
-
-<Files "form-secret.php">
-  Require all denied
-</Files>
+<FilesMatch "^(form-abuse|form-secret)\.php$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>

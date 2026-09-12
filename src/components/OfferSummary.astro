@@ -1,0 +1,66 @@
+---
+import { offers } from '../data/offers';
+
+interface Props {
+  variant?: 'full' | 'compact';
+  class?: string;
+}
+
+const { variant = 'full', class: className = '' } = Astro.props;
+---
+
+<div class={`offer-summary offer-summary--${variant} ${className}`}>
+  <div class="offer-summary__grid">
+    {offers.map((offer) => (
+      <article class={`offer-summary__card offer-summary__card--${offer.tone}`}>
+        <div class="offer-summary__top">
+          <p class="offer-summary__label">{offer.label}</p>
+          <h3>{offer.name}</h3>
+          <p class="offer-summary__price">{offer.price}</p>
+          <p class="offer-summary__duration">{offer.duration}</p>
+        </div>
+        <p class="offer-summary__intro">{offer.intro}</p>
+        {variant === 'full' && <ul>{offer.includes.map((item) => <li>{item}</li>)}</ul>}
+        {variant === 'full' && <p class="offer-summary__note">{offer.note}</p>}
+        <a class="button" href="/kontakt">Unverbindlich anfragen</a>
+      </article>
+    ))}
+  </div>
+  <p class="offer-summary__footnote">Alle Preise in Schweizer Franken. Privat zu bezahlen. Die Begleitung beginnt nach einem passenden Online-Ersttermin. Umfang, Absagefrist und Zahlungsbedingungen werden vor der verbindlichen Buchung klar bestätigt.</p>
+</div>
+
+<style>
+  .offer-summary__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line);
+  }
+  .offer-summary--compact .offer-summary__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .offer-summary__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 31rem;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .offer-summary--compact .offer-summary__card { min-height: 25rem; padding: clamp(1.35rem, 2.2vw, 2rem); }
+  .offer-summary__card--featured { background: #dce6dd; }
+  .offer-summary__top { width: 100%; border-bottom: 1px solid var(--line); padding-bottom: 1.2rem; }
+  .offer-summary__label { margin: 0 0 1.7rem; color: var(--mineral); text-transform: uppercase; letter-spacing: .1em; font-size: .7rem; font-weight: 600; }
+  .offer-summary__card h3 { margin: 0; font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.4rem); line-height: 1; font-weight: 400; }
+  .offer-summary__price { margin: 1rem 0 0; font-family: var(--serif); font-size: 2rem; line-height: 1; }
+  .offer-summary__duration { margin: .55rem 0 0; color: var(--ink-soft); font-size: .82rem; }
+  .offer-summary__intro { max-width: 29rem; margin: 1.3rem 0 1rem; color: var(--ink-soft); font-size: .95rem; }
+  .offer-summary__card ul { width: 100%; margin: 0 0 1rem; padding: 0; list-style: none; }
+  .offer-summary__card li { position: relative; padding: .7rem 0 .7rem 1.2rem; border-top: 1px solid var(--line); font-size: .88rem; }
+  .offer-summary__card li::before { content: '+'; position: absolute; left: 0; color: var(--mineral); font-weight: 600; }
+  .offer-summary__note { margin: 0 0 1.4rem; color: var(--ink-soft); font-size: .78rem; }
+  .offer-summary__card .button { margin-top: auto; }
+  .offer-summary__footnote { max-width: 52rem; margin: 1.5rem 0 0; color: var(--ink-soft); font-size: .78rem; }
+  .offer-summary--compact .offer-summary__footnote { color: #bdc9c2; }
+  @media (max-width: 1000px) { .offer-summary--compact .offer-summary__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 800px) { .offer-summary__grid, .offer-summary--compact .offer-summary__grid { grid-template-columns: 1fr; } .offer-summary__card, .offer-summary--compact .offer-summary__card { min-height: auto; } }
+</style>

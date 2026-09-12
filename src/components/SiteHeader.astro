@@ -1,11 +1,35 @@
+---
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => href === '/' ? path === '/' : path === href || path.startsWith(`${href}/`);
+const complaints = [
+  ['/beschwerden/knieschmerzen-sport', 'Knieschmerzen beim Sport'],
+  ['/beschwerden/achillessehne', 'Achillessehne'],
+  ['/beschwerden/oberschenkelzerrung', 'Oberschenkel gezerrt'],
+  ['/beschwerden/umgeknickter-knoechel', 'Umgeknickter Knöchel'],
+  ['/beschwerden/rueckenschmerzen-sport', 'Rückenschmerzen beim Sport'],
+];
+---
 <header class="site-header">
   <div class="wrap header-inner">
     <div class="brand-lockup">
-      <a class="wordmark" href="/" aria-label="steepstep.com, Startseite"><img src="/brand/steepstep-mark.svg" alt="" width="32" height="32" /><span>steepstep</span><small>.com</small></a>
-      <span class="brand-claim">Online-Physiotherapie für Sport und Alltag</span>
+      <a class="wordmark" href="/" aria-label="steepstep, Startseite"><img src="/brand/steepstep-mark.svg" alt="" width="32" height="32" /><span>steepstep</span></a>
+      <span class="brand-claim">Online-Physiotherapie<br />für Sport und Alltag</span>
     </div>
-    <nav class="nav" id="hauptnavigation" aria-label="Hauptnavigation"><a href="/">Startseite</a><a href="/preise">Preise</a><a href="/sport">Sport &amp; Bewegung</a><a href="/beschwerden">Beschwerden</a><a href="/ueber-uns">Über uns</a><a href="/fragen">Fragen</a><a class="button" href="/kontakt">Kostenloses Gespräch anfragen</a></nav>
-    <button class="menu" type="button" aria-controls="hauptnavigation" aria-label="Menü öffnen" aria-expanded="false">Menü</button>
+    <nav class="nav" id="hauptnavigation" aria-label="Hauptnavigation">
+      <a class:list={{ active: isActive('/preise') }} href="/preise">Preise</a>
+      <a class:list={{ active: isActive('/sport') }} href="/sport">Sport &amp; Bewegung</a>
+      <details class="nav-group">
+        <summary class:list={{ active: isActive('/beschwerden') }}>Beschwerden<span class="nav-chevron" aria-hidden="true">⌄</span></summary>
+        <div class="nav-submenu">
+          <a href="/beschwerden">Alle Beschwerden</a>
+          {complaints.map(([href, label]) => <a class:list={{ active: isActive(href) }} href={href}>{label}</a>)}
+        </div>
+      </details>
+      <a class:list={{ active: isActive('/ueber-uns') }} href="/ueber-uns">Über uns</a>
+      <a class:list={{ active: isActive('/fragen') }} href="/fragen">Fragen</a>
+      <a class="button header-cta" href="/kontakt" aria-label="Kostenloses Gespräch anfragen">Kostenloses Gespräch</a>
+    </nav>
+    <button class="menu" type="button" aria-controls="hauptnavigation" aria-label="Menü öffnen" aria-expanded="false"><span class="menu-icon" aria-hidden="true"><i></i><i></i><i></i></span><span>Menü</span></button>
   </div>
-  <noscript><style>@media (max-width: 800px) { #hauptnavigation { display: flex; flex-direction: column; align-items: stretch; gap: .7rem; padding: .7rem 0; } .menu { display: none; } }</style></noscript>
+  <noscript><style>@media (max-width: 1050px) { #hauptnavigation { display: flex; flex-direction: column; align-items: stretch; gap: .7rem; padding: .7rem 0; } .menu { display: none; } }</style></noscript>
 </header>

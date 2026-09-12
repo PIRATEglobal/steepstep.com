@@ -7,5 +7,10 @@ export default defineConfig({
     resolve: {
       tsconfigPaths: false,
     },
+    server: {
+      proxy: {
+        '/api': `http://127.0.0.1:${process.env.STEEPSTEP_PHP_PORT || '8787'}`,
+      },
+    },
   },
 });

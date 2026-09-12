@@ -34,9 +34,24 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
     <slot />
     <SiteFooter />
     <script is:inline>
-      const menu = document.querySelector('.menu'); const nav = document.querySelector('#hauptnavigation');
-      menu?.addEventListener('click', () => { const open = nav?.classList.toggle('is-open') ?? false; menu.setAttribute('aria-expanded', String(open)); menu.setAttribute('aria-label', open ? 'Menü schliessen' : 'Menü öffnen'); });
-      nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { nav.classList.remove('is-open'); menu?.setAttribute('aria-expanded', 'false'); }));
+      const menu = document.querySelector('.menu');
+      const nav = document.querySelector('#hauptnavigation');
+      const closeGroups = () => nav?.querySelectorAll('details[open]').forEach((group) => group.removeAttribute('open'));
+      const closeMenu = () => { nav?.classList.remove('is-open'); closeGroups(); menu?.setAttribute('aria-expanded', 'false'); menu?.setAttribute('aria-label', 'Menü öffnen'); };
+      menu?.addEventListener('click', () => {
+        const open = nav?.classList.toggle('is-open') ?? false;
+        menu.setAttribute('aria-expanded', String(open));
+        menu.setAttribute('aria-label', open ? 'Menü schliessen' : 'Menü öffnen');
+        if (open) nav?.querySelector('a, summary')?.focus();
+      });
+      nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+      nav?.querySelectorAll('details').forEach((group) => group.addEventListener('toggle', () => {
+        if (group.open) nav.querySelectorAll('details').forEach((other) => { if (other !== group) other.removeAttribute('open'); });
+      }));
+      document.addEventListener('click', (event) => {
+        if (!nav?.contains(event.target) && !menu?.contains(event.target)) { closeGroups(); if (nav?.classList.contains('is-open')) closeMenu(); }
+      });
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { closeMenu(); nav?.querySelectorAll('details[open]').forEach((group) => group.removeAttribute('open')); menu?.focus(); } });
     </script>
   </body>
 </html>

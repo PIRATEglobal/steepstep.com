@@ -1,0 +1,222 @@
+---
+interface Step {
+  label: string;
+  title: string;
+  text: string;
+}
+
+interface Props {
+  title: string;
+  intro?: string;
+  steps: Step[];
+  tone?: 'paper' | 'dark';
+  ariaLabel?: string;
+}
+
+const { title, intro, steps, tone = 'paper', ariaLabel = title } = Astro.props;
+---
+
+<section class={`process-diagram process-diagram--${tone}`} aria-label={ariaLabel}>
+  <div class="process-diagram__heading">
+    <p class="section-meta">Der Weg</p>
+    <h2>{title}</h2>
+    {intro && <p>{intro}</p>}
+  </div>
+  <ol aria-label={ariaLabel}>
+    {steps.map((step) => (
+      <li>
+        <span class="process-diagram__index" aria-hidden="true"></span>
+        <div>
+          <p class="process-diagram__label">{step.label}</p>
+          <h3>{step.title}</h3>
+          <p class="process-diagram__text">{step.text}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .process-diagram {
+    container: process-diagram / inline-size;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 5vw, 3.5rem);
+    margin: 3rem 0;
+    padding: clamp(1.4rem, 3vw, 2.6rem);
+    border: 1px solid var(--line);
+  }
+  .process-diagram--dark {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: #52726b;
+  }
+  .process-diagram__heading h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -.04em;
+    font-weight: 400;
+    margin: .8rem 0 1rem;
+  }
+  .process-diagram__heading > p:last-child {
+    max-width: 28rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .process-diagram--dark .process-diagram__heading > p:last-child {
+    color: #bdc9c2;
+  }
+  .process-diagram ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+  .process-diagram li {
+    position: relative;
+    min-width: 0;
+    padding: 0 1.15rem;
+    border-left: 1px solid var(--line);
+    min-height: 12rem;
+  }
+  .process-diagram li:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .process-diagram li:nth-child(-n + 3)::after {
+    content: '→';
+    position: absolute;
+    right: -.5rem;
+    top: 1.05rem;
+    color: var(--mineral);
+    background: var(--paper);
+    line-height: 1;
+    padding: .15rem;
+  }
+  .process-diagram--dark li {
+    border-color: #52726b;
+  }
+  .process-diagram--dark li:not(:last-child)::after {
+    background: var(--ink);
+  }
+  .process-diagram--dark li:nth-child(-n + 3)::after {
+    background: var(--ink);
+  }
+  .process-diagram__index {
+    display: block;
+    width: .55rem;
+    height: .55rem;
+    margin-bottom: 1.4rem;
+    border: 1px solid var(--mineral);
+    border-radius: 50%;
+  }
+  .process-diagram__label {
+    margin: 0 0 .6rem;
+    color: var(--mineral);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .68rem;
+    font-weight: 600;
+  }
+  .process-diagram h3 {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    line-height: 1.05;
+    font-weight: 400;
+    margin: 0 0 .7rem;
+  }
+  .process-diagram__text {
+    color: var(--ink-soft);
+    font-size: .86rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .process-diagram--dark .process-diagram__text {
+    color: #bdc9c2;
+  }
+  @media (max-width: 800px) {
+    .process-diagram {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .process-diagram ol {
+      grid-template-columns: 1fr;
+    }
+    .process-diagram li,
+    .process-diagram li:first-child {
+      min-height: auto;
+      padding: 1rem 0 1rem 2.5rem;
+      border-left: 0;
+      border-top: 1px solid var(--line);
+    }
+    .process-diagram li:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .process-diagram li:not(:last-child)::after {
+      content: '↓';
+      right: auto;
+      left: .2rem;
+      top: auto;
+      bottom: -.7rem;
+      z-index: 1;
+    }
+    .process-diagram__index {
+      position: absolute;
+      left: 0;
+      top: 1rem;
+      margin: 0;
+    }
+    .process-diagram li:first-child .process-diagram__index {
+      top: 0;
+    }
+  }
+  @container process-diagram (min-width: 42rem) and (max-width: 56rem) {
+    .process-diagram ol {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem 0;
+    }
+    .process-diagram li,
+    .process-diagram li:first-child {
+      min-height: 11rem;
+      padding: 0 1.15rem;
+      border-left: 1px solid var(--line);
+    }
+    .process-diagram li:nth-child(odd) { border-left: 0; padding-left: 0; }
+    .process-diagram li:nth-child(odd)::after {
+      content: '→';
+      right: -.5rem;
+      top: 1.05rem;
+      bottom: auto;
+      left: auto;
+      z-index: 1;
+      background: var(--paper);
+    }
+    .process-diagram li:nth-child(2)::after {
+      content: '↓';
+      right: auto;
+      left: 50%;
+      top: auto;
+      bottom: -1.1rem;
+      background: var(--paper);
+    }
+    .process-diagram li:nth-child(3)::after {
+      content: '';
+    }
+    .process-diagram--dark li:nth-child(odd)::after,
+    .process-diagram--dark li:nth-child(2)::after {
+      background: var(--ink);
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) and (hover: hover) {
+    .process-diagram li {
+      transition: transform .22s cubic-bezier(.2,.7,.2,1), background .22s ease;
+    }
+    .process-diagram li:hover {
+      transform: translateY(-2px);
+    }
+  }
+</style>
