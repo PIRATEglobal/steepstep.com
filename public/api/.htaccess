@@ -1,6 +1,5 @@
-Options -Indexes
 # All-Inkl's shared Apache setup uses access_compat syntax for file blocking.
-# The newer Apache authorization directive returns a server error when matched.
+# Keep this file within the host's allowed Limit override class.
 <FilesMatch "^\.">
   Order allow,deny
   Deny from all

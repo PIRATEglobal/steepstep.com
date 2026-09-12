@@ -61,11 +61,16 @@ foreach (['HTTP_ORIGIN', 'form_started', "!empty(\$_POST['website'])", 'ss_captc
 $api_htaccess = file_get_contents(__DIR__ . '/../public/api/.htaccess');
 check(is_string($api_htaccess), 'API access rules could not be read');
 check(strpos($api_htaccess, 'Require all denied') === false, 'incompatible Apache Require rule present');
+check(strpos($api_htaccess, 'Options ') === false, 'host-incompatible Options directive present');
 check(strpos($api_htaccess, '<FilesMatch "^(form-abuse|form-secret)\\.php$">') !== false, 'protected API files rule missing');
 check(strpos($api_htaccess, 'Deny from all') !== false, 'protected API files are not denied');
 $rate_htaccess = file_get_contents(__DIR__ . '/../public/api/.rate-limit/.htaccess');
 check(is_string($rate_htaccess), 'rate-limit access rules could not be read');
 check(strpos($rate_htaccess, 'Require all denied') === false, 'incompatible rate-limit authorization rule present');
+check(strpos($rate_htaccess, 'Options ') === false, 'host-incompatible rate-limit Options directive present');
 check(strpos($rate_htaccess, 'Deny from all') !== false, 'rate-limit files are not denied');
+$deploy_workflow = file_get_contents(__DIR__ . '/../.github/workflows/deploy.yml');
+check(is_string($deploy_workflow), 'deploy workflow could not be read');
+check(strpos($deploy_workflow, "return base64_decode('\$secret_b64', true);") !== false, 'generated secret decoding contract changed');
 
 echo "Contact security checks passed.\n";
