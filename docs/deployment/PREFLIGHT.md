@@ -6,21 +6,20 @@ Scope: read-only preflight for publishing the Astro site to `pirateglobal/steeps
 
 ## Findings
 
-- The working tree is currently the Resonance repository, on `main`, with `origin` pointing to `https://github.com/manusco/resonance.git`.
-- The website is a separate Astro project under `site/`. It currently declares Astro `^7.3.0` and builds to `site/dist/`.
-- There is no deployment workflow in this working tree. Existing `.github/workflows/` files belong to the Resonance framework.
-- `gh auth status` reports an invalid login for the `manusco` account. The GitHub API and `git ls-remote` checks could not resolve `github.com` in this sandbox, so the target repository existence, permissions, default branch, Actions settings, and secret names remain unverified.
-- No All-Inkl host, username, port, or credential was found in repository files. No secret values were read or printed.
+- The working tree is the standalone Steepstep website repository, on `main`, with `origin` pointing to `https://github.com/pirateglobal/steepstep.com.git`.
+- The repository root is the Astro project. It declares Astro `^7.3.0` and builds to `dist/`.
+- `.github/workflows/deploy.yml` is the active Steepstep deployment workflow. It builds and checks the root project, then deploys only after a protected manual publication request.
+- No All-Inkl host, username, port, or credential is stored in repository files. No secret values were read or printed.
 
 ## Target boundary
 
-The only permitted remote deployment destination is the exact All-Inkl directory `/steepstep.com/`. The workflow must upload only the generated static output from `site/dist/` to that directory. It must not use a server root, parent directory, wildcard target, cleanup flag, or any path containing `..`.
+The only permitted remote deployment destination is the exact All-Inkl directory `/steepstep.com/`. The workflow must upload only the generated static output from `dist/` to that directory. It must not use a server root, parent directory, wildcard target, cleanup flag, or any path containing `..`.
 
 The workflow should build first, then deploy from the artifact or checkout output. Do not upload the repository, `node_modules`, `.git`, docs, source files, or Astro cache.
 
 ## Recommended GitHub shape
 
-Create or use `https://github.com/pirateglobal/steepstep.com` as a dedicated repository whose checked-out website lives at repository root, or keep this repository and set the workflow working directory to `site/`. The second option carries the Resonance framework and its unrelated workflows into the new repository, so a dedicated site repository is the cleaner boundary.
+The dedicated repository is `https://github.com/pirateglobal/steepstep.com`; its checked-out website lives at repository root. Resonance project files are kept outside this repository and are not part of the deployment artifact.
 
 Before pushing, confirm the exact target repository and branch with an authenticated GitHub session. The current local `origin` is not the requested destination and must not be overwritten without an explicit, reviewable repository setup step.
 
@@ -71,10 +70,9 @@ All-Inkl states that its servers support explicit FTP over SSL/TLS. Confirm the 
 
 - Authenticated access for the `pirateglobal` GitHub account is missing in this environment.
 - Target repository existence, ownership, branch, and Actions permission settings are unverified because GitHub was unreachable from this sandbox.
-- The repository boundary is unresolved: dedicated site repository versus the current Resonance repository with a `site/` working directory.
-- All-Inkl FTPS connection details and the endpoint's certificate behavior are unknown.
-- Production workflow and secret names do not yet exist.
-- The public site still contains preview/legal/content gates recorded in the website brief. Deployment infrastructure can be prepared, but public launch claims require the approved practice details and legal copy.
+- The All-Inkl FTPS hostname, domain-scoped username, password, and account home mapping must remain verified in KAS and GitHub environment secrets.
+- A live contact submission has not been performed in this gate. The workflow injects the form secret at deploy time; the contact and token endpoints require that secret at runtime.
+- GitHub Actions production configuration and All-Inkl account mapping are external facts; this local preflight does not read secret values or connect to All-Inkl.
 
 ## Sources checked on 2026-09-12
 
@@ -85,4 +83,4 @@ All-Inkl states that its servers support explicit FTP over SSL/TLS. Confirm the 
 - [All-Inkl SSH activation](https://all-inkl.com/wichtig/anleitungen/kas/ssh/dateiverwaltung/aktivierung-von-ssh-nur-im-hauptaccount-moeglich_395.html), for plan and KAS prerequisites.
 - [SamKirkland FTP Deploy Action](https://github.com/SamKirkland/FTP-Deploy-Action), for documented FTPS and `server-dir` inputs. This is a third-party action and needs pinning and review.
 
-Status: **NEEDS_CONTEXT** for external authentication and All-Inkl connection facts. The local site build shape is clear; no external mutation was performed.
+Status: **READY_PENDING_EXTERNAL_SMOKE_TEST**. The local site build and deployment shape are clear. A production smoke test still needs to confirm the protected GitHub workflow, All-Inkl directory mapping, HTTPS routes, and contact endpoint runtime without exposing credentials.

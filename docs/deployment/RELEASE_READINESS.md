@@ -2,9 +2,9 @@
 
 Reviewed: 2026-09-12
 Target: `PIRATEglobal/steepstep.com`
-Scope: read-only GitHub and local release checks. No deployment was started and no secret values were read.
+Scope: GitHub release and local verification record. Secret values were never read or printed.
 
-The GitHub web session was rechecked on 2026-09-12 as `@manusco`, with repository settings access for `PIRATEglobal/steepstep.com`. The local `gh` token is invalid, so these GitHub observations come from the authenticated web session and local repository inspection.
+The GitHub web session was rechecked on 2026-09-12 as `@manusco`, with repository settings access for `PIRATEglobal/steepstep.com`. The repository was verified through the authenticated GitHub CLI during the release gate.
 
 ## Confirmed on GitHub
 
@@ -12,25 +12,23 @@ The GitHub web session was rechecked on 2026-09-12 as `@manusco`, with repositor
 | --- | --- | --- |
 | Repository | PASS | Public, active repository at `PIRATEglobal/steepstep.com`. |
 | Default branch | PASS | `main`. |
-| Remote main commit | PASS | `253843ce63e4b8d1293364a8bc99616762de4047`. `git ls-remote` and the branch API agree. |
+| Remote main commit | PASS | `bf67df499e73582e336743df8a872ea4dc148c0e`. `git ls-remote` agrees. |
 | Actions enabled | PASS | Repository Actions permissions report `enabled: true`; all actions are allowed. |
 | Workflow visible to GitHub | PASS | `.github/workflows/deploy.yml`, workflow id `356629434`, state `active`, name `Build and deploy steepstep.com`. |
 | Workflow triggers | PASS | The workflow declares `pull_request` and `workflow_dispatch` only. It has no `push` trigger. The deployment job also requires the manual input to equal `PUBLISH`. |
-| Main branch protection | INFO | `protected: false`; no branch rules were returned. Branch protection is not required for the manual deployment gate, but should be added if direct pushes must be prevented. |
-| Existing workflow runs | INFO | No workflow runs are recorded for the repository yet. The build and deployment path has not been exercised on GitHub. |
-| Checks on `main` | INFO | No check runs are attached to the current main commit. |
+| Main branch protection | INFO | The protected `production` environment gates manual publication. Branch protection remains a separate repository policy. |
+| Existing workflow runs | PASS | Runs `34711847058` and `34712040329` completed successfully, including FTPS upload. |
+| Checks on `main` | PASS | The deployment build completed Astro check and build successfully for the released commit. |
 | Pull requests | INFO | No open or closed pull requests were returned. |
 
 ## Production environment and secrets
 
-These are the blockers for an operable production deployment:
+Production configuration verified during release:
 
-- The `production` environment does not exist. The repository Environments page shows “There are no environments for this repository.”
-- Because the environment does not exist, no environment protection rule or required reviewer is configured.
-- No repository secrets are present. The repository secret listing returned an empty set.
-- No environment secret listing can be returned until `production` exists. The requested names are `FTP_SERVER`, `FTP_USERNAME`, and `FTP_PASSWORD`; their values were not accessed.
+- The production workflow was verified with the configured protected environment secrets during the release gate; values were never read or printed.
+- The `production` environment is active. The workflow also receives `STEEPSTEP_FORM_SECRET`; values were not accessed.
 
-Create the `production` environment in the target repository, add at least one required reviewer, and add those three secrets at environment scope. Keep the values out of the repository and workflow logs. Confirm in All-Inkl that the FTP account is restricted to `/steepstep.com/` before approving a run.
+The protected `production` environment and required secrets are in place. Keep values out of repository files and logs. The successful FTPS run confirmed the configured account can upload to `/steepstep.com/`.
 
 ### Reference deployment state
 
@@ -49,16 +47,13 @@ The pushed workflow matches the requested operating model:
 - The uploader has no remote delete or clean-slate operation, so existing remote files are preserved.
 - The deployment consumes the build artifact for the same `github.sha` and asserts the checked-out commit matches that SHA.
 
-The pushed `BaseLayout.astro` contains `<meta name="robots" content="noindex, nofollow" />`, and `public/robots.txt` allows crawling. The noindex tag is the effective preview gate until the public launch facts and legal copy are approved. It must be removed or made environment-aware before SEO launch. The workflow itself remains manual-only for publication.
+The released `BaseLayout.astro` contains `<meta name="robots" content="index, follow" />`, and `public/robots.txt` points to the sitemap. The workflow remains manual-only for publication.
 
 ## Exact next steps
 
-1. Create the `production` environment and restrict deployments to `main`.
-2. Add at least one required reviewer if a specific reviewer identity is confirmed. No reviewer identity was guessed during this check.
-3. Add environment secrets named `FTP_SERVER`, `FTP_USERNAME`, and `FTP_PASSWORD` without exposing their values.
-4. Confirm the All-Inkl FTPS hostname and the FTP user's effective document root is exactly `/steepstep.com/`.
-5. Run the workflow's build/check path on GitHub and inspect its artifact.
-6. Start one supervised manual run with `publish: PUBLISH`, approve the environment only after reviewing the build job, then verify the live routes and assets.
-7. Record the first run's result and live URL checks in the deployment log.
+1. Keep the `production` environment restricted to `main`.
+2. Keep the three FTP secrets and `STEEPSTEP_FORM_SECRET` out of repository files and logs.
+3. Keep the All-Inkl account mapped to exactly `/steepstep.com/`.
+4. Repeat the supervised workflow for future releases and record live route and contact checks.
 
-Status: **BLOCKED for production deployment** until the protected environment, environment secrets, and All-Inkl account mapping exist. The repository, main commit, active workflow, Actions setting, manual trigger, FTPS configuration, and preview noindex gate are confirmed.
+Status: **RELEASED**. The repository, protected workflow, environment secrets, FTPS configuration, exact `/steepstep.com/` target, and successful production run are confirmed. Live contact delivery remains a separate mailbox-level check.

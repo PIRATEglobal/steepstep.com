@@ -3,15 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/global.css';
 ---
 <BaseLayout title="Kontakt">
-  <header class="site-header"><div class="wrap header-inner">
-    <a class="wordmark" href="/" aria-label="steepstep.com, Startseite"><img src="/brand/steepstep-mark.svg" alt="" width="32" height="32" /><span>steepstep</span><small>.com</small></a>
-    <a class="button button--light" href="/">Zur Startseite</a>
-  </div></header>
   <main id="inhalt" class="wrap contact-page">
     <section class="contact-intro" aria-labelledby="contact-title"><p class="section-meta">Kontakt</p><h1 id="contact-title" class="section-heading">Sie möchten etwas klären?</h1><p class="hero-copy">Schreiben Sie uns. Wir lesen Ihre Nachricht persönlich und melden uns so bald wie möglich.</p>
     <p class="contact-person"><strong>Ihre Ansprechperson</strong><br />Natalja Krol, Physiotherapeutin mit Schwerpunkt Sportphysiotherapie</p></section>
     <section class="contact-card" aria-labelledby="form-title">
-      <div class="contact-card__intro"><p class="section-meta">Ihre Nachricht</p><h2 id="form-title">Was möchten Sie wissen?</h2><p>Fragen zum Ablauf, zur Eignung oder zum nächsten Schritt sind willkommen.</p><p class="contact-note"><strong>Bitte keine Gesundheitsdaten senden.</strong> Beschreiben Sie hier keine Diagnose, Verletzung oder andere vertrauliche medizinische Angaben. Diese gehören in ein geschütztes Gespräch.</p></div>
+      <div class="contact-card__intro"><p class="section-meta">Ihre Nachricht</p><h2 id="form-title">Was möchten Sie wissen?</h2><p>Fragen zum kostenlosen Orientierungsgespräch, zum Ablauf oder zum nächsten Schritt sind willkommen. Schreiben Sie uns, wenn Sie das 20-minütige Gespräch anfragen möchten.</p><p class="contact-note"><strong>Bitte keine Gesundheitsdaten senden.</strong> Beschreiben Sie hier keine Diagnose, Verletzung oder andere vertrauliche medizinische Angaben. Diese gehören in ein geschütztes Gespräch.</p></div>
       <form id="contact-form" class="contact-form" action="/api/contact.php" method="post" novalidate>
         <div class="form-field form-field--trap" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off" /></div>
         <input type="hidden" name="_token" id="form-token" /><input type="hidden" name="captcha_challenge" id="captcha-challenge" /><input type="hidden" name="form_started" id="form-started" />

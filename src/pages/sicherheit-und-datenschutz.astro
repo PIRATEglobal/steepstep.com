@@ -3,20 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/global.css';
 ---
 <BaseLayout title="Sicherheit und Datenschutz">
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <a class="wordmark" href="/" aria-label="steepstep.com, Startseite"><img src="/brand/steepstep-mark.svg" alt="" width="32" height="32" /><span>steepstep</span><small>.com</small></a>
-      <a class="button button--light" href="/">Zur Startseite</a>
-    </div>
-  </header>
-  <main id="inhalt" class="wrap">
-    <section class="final-cta">
-      <p class="section-meta">Sicherheit und Datenschutz</p>
-      <h1 class="section-heading">Sicherheit und Datenschutz, verständlich erklärt.</h1>
-      <p class="hero-copy">Wir beschreiben den sicheren Rahmen, den Umgang mit Ihren Daten und die Grenzen der Online-Betreuung verständlich. Bei akuten Notfällen wählen Sie in der Schweiz 144. Über dieses Formular werden keine Gesundheitsdaten erhoben. Technische Verbindungsdaten und Kontaktangaben werden gemäss Datenschutzerklärung verarbeitet.</p>
-      <p class="pending">Bitte senden Sie über das Kontaktformular keine Diagnose, Verletzung oder andere Gesundheitsdaten.</p>
-      <a class="button" href="/">Zurück zur Startseite</a>
-    </section>
+  <main id="inhalt" class="wrap article-page safety-page">
+    <p class="eyebrow">Sicherheit und Datenschutz</p>
+    <h1>Online beginnt mit einer guten Einordnung.</h1>
+    <p class="article-intro">Online-Physiotherapie kann ein guter nächster Schritt sein, wenn Ihre Situation per Video verantwortungsvoll besprochen und begleitet werden kann. Hier zeigen wir, was das bedeutet, wo die Grenze liegt und welche Daten auf dieser Website anfallen.</p>
+    <section class="article-section"><h2>Was per Video möglich ist</h2><p>Im Gespräch erzählen Sie, was Sie wieder tun möchten, wie sich Ihre Situation entwickelt hat und welche Belastung im Alltag oder Sport wichtig ist. Wir können Bewegungen beobachten, Fragen einordnen und gemeinsam einen nächsten Schritt festlegen.</p><ul class="article-list"><li>Ihre Ziele, Ihren Alltag und den Verlauf Ihrer Situation besprechen</li><li>geeignete Bewegungen im Gespräch beobachten und verständlich erklären</li><li>Belastung, Übungen und den nächsten Termin gemeinsam anpassen</li><li>offen sagen, wenn eine Untersuchung vor Ort sinnvoller ist</li></ul></section>
+    <section class="article-section safety-boundary"><h2>Die Grenze ist Teil der Betreuung</h2><p>Video ersetzt keine körperliche Untersuchung, Palpation, Bildgebung oder Behandlung vor Ort. Nicht jede Situation ist für eine Online-Betreuung geeignet. Wenn die Fachperson die Situation online nicht sicher einordnen kann, endet der digitale Weg mit einer Empfehlung zur lokalen Abklärung.</p><p><strong>Bei einem medizinischen Notfall oder akuten, schweren Beschwerden wählen Sie in der Schweiz 144.</strong> Für dringende Fragen wenden Sie sich an eine geeignete medizinische Fachstelle in Ihrer Nähe. Bitte warten Sie bei einem Notfall nicht auf einen Online-Termin.</p></section>
+    <section class="article-section"><h2>Kontakt ohne Gesundheitsdaten</h2><p>Das <a href="/kontakt">Kontaktformular</a> ist für organisatorische und allgemeine Fragen gedacht. Bitte schreiben Sie dort keine Diagnose, Verletzung, Beschwerden, Medikamentenangaben oder andere Gesundheitsdaten. Solche Angaben gehören, wenn überhaupt erforderlich, in einen geschützten fachlichen Kontakt.</p><p>Das Formular verwendet keinen Analyse- oder Werbedienst und keine Tracking-Cookies. Für den Schutz vor Spam werden technische Angaben wie Zeitpunkt und eine gehashte Kennung vorübergehend verarbeitet. Ihre Nachricht wird an <a href="mailto:contact@steepstep.com">contact@steepstep.com</a> gesendet, damit wir Ihnen antworten können.</p></section>
+    <section class="article-section"><h2>Was mit Ihren Daten geschieht</h2><p>Beim Besuch verarbeitet der Hosting-Anbieter technische Verbindungsdaten, soweit das für die Auslieferung und den sicheren Betrieb nötig ist. Wenn Sie uns schreiben, bearbeiten wir Name, E-Mail-Adresse und Nachricht für die Antwort auf Ihre Anfrage. Wir sammeln nur, was wir für diesen Zweck brauchen, und bewahren die Angaben nicht länger auf, als es dafür oder aufgrund gesetzlicher Pflichten erforderlich ist.</p><p>Die Einzelheiten zu Verantwortlicher Stelle, Rechtsgrundlagen, Aufbewahrung, Ihren Rechten und dem Hosting finden Sie in der <a href="/datenschutz">Datenschutzerklärung</a>.</p></section>
+    <nav class="article-links" aria-label="Weiterführende Seiten"><a href="/kontakt">Kontakt aufnehmen</a><a href="/datenschutz">Datenschutzerklärung</a><a href="/impressum">Impressum</a><a href="/">Zur Startseite</a></nav>
   </main>
-  <footer class="site-footer"><div class="wrap footer-inner"><span>© {new Date().getFullYear()} PIRATE GmbH</span><div class="footer-links"><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a></div></div></footer>
 </BaseLayout>

@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+import '../styles/conditions.css';
+
+interface Phase { name: string; focus: string; marker: string; }
+interface FAQ { q: string; a: string; }
+interface Props {
+  title: string; description: string; eyebrow: string; intro: string; answer: string;
+  image?: { src: string; width: number; height: number; alt: string; caption: string };
+  onlineFit: string[]; inPerson: string[]; approach: string; phases: Phase[];
+  video: string; safety: string[]; mistakes: string[]; stance: string;
+  faqs: FAQ[]; sources: { label: string; url: string; date: string }[]; related: { label: string; href: string }[];
+}
+const p = Astro.props;
+const conditionImages = {
+  'Knieschmerzen beim Sport': { src:'/images/conditions/knee-rehab.webp', width:1200, height:800, alt:'Sportlerin bei einer kontrollierten Rumpf- und Beinübung auf einer Matte', caption:'Eine kontrollierte Übung kann Belastung sichtbar und besprechbar machen. Illustratives Bild, Unsplash-Lizenz.' },
+  'Umgeknickter Knöchel': { src:'/images/conditions/ankle-rehab.webp', width:1200, height:800, alt:'Drei Läuferinnen und Läufer in Bewegung auf einer Bahn', caption:'Nach einer Verletzung zählt der Weg zurück in belastbare Bewegung. Illustratives Bild, Unsplash-Lizenz.' },
+  'Achillessehne und Laufbelastung': { src:'/images/conditions/achilles-calf.webp', width:1200, height:800, alt:'Physiotherapeutische Übung mit einem grünen Widerstandsband', caption:'Kraft und Belastung werden in passenden Stufen aufgebaut. Illustratives Bild, Unsplash-Lizenz.' },
+  'Oberschenkel gezerrt': { src:'/images/conditions/hamstring-training.webp', width:1200, height:800, alt:'Sportler bei einer kontrollierten Kraftübung mit einer Langhantel', caption:'Kraft ist ein Teil der Rückkehr zu Tempo und Sport. Illustratives Bild, Unsplash-Lizenz.' },
+  'Rückenschmerzen beim Sport': { src:'/images/conditions/back-movement.webp', width:1200, height:800, alt:'Physiotherapeutische Handgriffe am unteren Rücken', caption:'Eine gute Einordnung beginnt mit dem Menschen und seinem Verlauf. Illustratives Bild, Unsplash-Lizenz.' }
+} as Record<string, { src: string; width: number; height: number; alt: string; caption: string }>;
+const image = p.image ?? conditionImages[p.title];
+const conditionFraming = {
+  'Knieschmerzen beim Sport': { video: 'Was wir bei Kniebewegungen per Video beobachten', progression: 'Belastung für das Knie wieder lesbar machen', safety: 'Wann das Knie vor Ort abgeklärt werden sollte', mistakes: 'Was Kniebeschwerden oft verlängert' },
+  'Umgeknickter Knöchel': { video: 'Was wir nach dem Umknicken per Video beobachten', progression: 'Vom sicheren Auftreten zurück in Richtungswechsel', safety: 'Wann der Knöchel vor Ort abgeklärt werden sollte', mistakes: 'Was nach einem Umknicken oft schiefgeht' },
+  'Achillessehne und Laufbelastung': { video: 'Was wir an der Waden- und Laufbelastung beobachten', progression: 'Von der Sehnenreaktion zurück zum Laufrhythmus', safety: 'Wann die Achillessehne vor Ort abgeklärt werden sollte', mistakes: 'Was eine gereizte Achillessehne oft nicht verträgt' },
+  'Oberschenkel gezerrt': { video: 'Was wir nach einer Muskelverletzung per Video beobachten', progression: 'Von kontrollierter Kraft zurück zu Tempo', safety: 'Wann der Oberschenkel vor Ort abgeklärt werden sollte', mistakes: 'Was die Rückkehr nach einer Zerrung oft bremst' },
+  'Rückenschmerzen beim Sport': { video: 'Was wir bei Ihrer sportlichen Bewegung per Video beobachten', progression: 'Vom schmerzhaften Alltag zurück zu belastbarer Bewegung', safety: 'Wann Rückenschmerzen vor Ort abgeklärt werden sollten', mistakes: 'Was Rückenschmerzen im Training oft verstärkt' }
+} as Record<string, { video: string; progression: string; safety: string; mistakes: string }>;
+const framing = conditionFraming[p.title] ?? { video: 'Was wir per Video sicher beobachten können', progression: 'Wie ein belastbarer nächster Schritt entsteht', safety: 'Wann eine Abklärung vor Ort sinnvoll ist', mistakes: 'Was den Aufbau oft bremst' };
+const faqSchema = p.faqs.map((faq) => ({ '@type': 'Question', name: faq.q, acceptedAnswer: { '@type': 'Answer', text: faq.a } }));
+---
+<BaseLayout title={p.title} description={p.description}>
+  <main id="inhalt" class="wrap article-page condition-page">
+    <p class="eyebrow">{p.eyebrow}</p>
+    <h1>{p.title}</h1>
+    <p class="article-intro">{p.intro}</p>
+    {image && <figure class="condition-feature-image feature-image feature-image--wide"><img src={image.src} width={image.width} height={image.height} loading="eager" alt={image.alt} /><figcaption>{image.caption}</figcaption></figure>}
+    <div class="condition-answer"><span>Die kurze Antwort</span><p>{p.answer}</p><a class="text-link" href="/kontakt">Kostenlos klären, ob Video passt <span aria-hidden="true">↗</span></a></div>
+
+    <section class="condition-split" aria-label="Passt Online-Physiotherapie">
+      <div class="condition-panel condition-panel--yes"><p class="condition-label">Online kann passen, wenn …</p><ul>{p.onlineFit.map((item) => <li>{item}</li>)}</ul></div>
+      <div class="condition-panel condition-panel--route"><p class="condition-label">Vor Ort abklären, wenn …</p><ul>{p.inPerson.map((item) => <li>{item}</li>)}</ul></div>
+    </section>
+
+    <section class="article-section"><p class="section-meta">Was dahinterstecken kann</p><h2>Wir ordnen Beschwerden ein, ohne aus der Ferne zu diagnostizieren.</h2><p>{p.approach}</p></section>
+    <section class="article-section condition-video"><p class="section-meta">Video und Bewegung</p><h2>{framing.video}</h2><p>{p.video}</p></section>
+
+    <section class="article-section"><p class="section-meta">Beispiel für den Aufbau</p><h2>{framing.progression}</h2><p class="condition-note">Beispiel, individuell angepasst. Die Phasen zeigen die Logik einer Begleitung. Sie ersetzen keine Untersuchung und sind keine persönliche Übungsempfehlung.</p><div class="condition-phases">{p.phases.map((phase) => <article><span>{phase.name}</span><h3>{phase.focus}</h3><p>{phase.marker}</p></article>)}</div></section>
+
+    <section class="article-section condition-safety"><p class="section-meta">Sicherheit zuerst</p><h2>{framing.safety}</h2><ul>{p.safety.map((item) => <li>{item}</li>)}</ul><p>Bei akuten oder starken Beschwerden wenden Sie sich an eine lokale medizinische Fachstelle. Das kostenlose Orientierungsgespräch ist kein Notfalldienst.</p></section>
+
+    <section class="article-section"><p class="section-meta">Was oft schiefgeht</p><h2>{framing.mistakes}</h2><ul class="condition-mistakes">{p.mistakes.map((item) => <li>{item}</li>)}</ul><div class="condition-stance"><span>Unsere Haltung</span><p>{p.stance}</p></div></section>
+
+    <section class="article-section"><p class="section-meta">Häufig gefragt</p><div class="faq-list">{p.faqs.map((faq, i) => <details open={i === 0}><summary>{faq.q}</summary><p>{faq.a}</p></details>)}</div></section>
+
+    <section class="article-section condition-sources"><p class="section-meta">Quellen und Einordnung</p><p>Redaktionell geprüft am 12. September 2026. Die Aussagen fassen die folgenden Leitlinien und Übersichten zusammen. Sie sind keine individuelle medizinische Beratung.</p><ul>{p.sources.map((source) => <li><a href={source.url} rel="noreferrer">{source.label}</a> <span>{source.date}</span></li>)}</ul></section>
+    <nav class="article-links" aria-label="Weiterführende Seiten"><a class="button" href="/kontakt">Kostenloses Orientierungsgespräch</a>{p.related.map((link) => <a href={link.href}>{link.label}</a>)}</nav>
+  </main>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'MedicalWebPage', name: p.title, description: p.description, url: Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined, dateModified: '2026-09-12', isPartOf: { '@type': 'WebSite', name: 'steepstep.com', url: 'https://steepstep.com' }, mainEntity: faqSchema })} />
+</BaseLayout>

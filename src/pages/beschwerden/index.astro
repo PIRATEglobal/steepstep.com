@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/global.css';
+import '../../styles/conditions.css';
+const cards = [
+  ['Knieschmerzen beim Sport', 'Belastung, Kraft und Vertrauen rund um das Knie.', '/beschwerden/knieschmerzen-sport/'],
+  ['Umgeknickter Knöchel', 'Stabilität zurückgewinnen und wieder sicher auftreten.', '/beschwerden/umgeknickter-knoechel/'],
+  ['Achillessehne', 'Lauf- und Sprungbelastung überlegt wieder aufbauen.', '/beschwerden/achillessehne/'],
+  ['Oberschenkel gezerrt', 'Von kontrollierter Belastung zurück zu Tempo.', '/beschwerden/oberschenkelzerrung/'],
+  ['Rückenschmerzen beim Sport', 'Aktiv bleiben, Belastung verstehen, Bewegung zurückholen.', '/beschwerden/rueckenschmerzen-sport/'],
+];
+---
+<BaseLayout title="Beschwerden beim Sport" description="Verständliche Orientierung zu sportbezogenen Beschwerden und Online-Physiotherapie in der Schweiz.">
+<main id="inhalt" class="wrap article-page condition-page"><p class="eyebrow">Beschwerden &amp; Sport</p><h1>Wenn der Körper bremst, braucht es einen guten nächsten Schritt.</h1><p class="article-intro">Diese Seiten helfen Ihnen, Ihre Situation zu ordnen. Sie erklären, welche Fragen wir im Video stellen, wie ein Aufbau aussehen kann und wann eine Untersuchung vor Ort wichtiger ist.</p>
+<div class="condition-answer"><span>Unser Ansatz</span><p>Wir beginnen mit Ihrem Ziel, Ihrem Alltag und der Belastung, die Ihre Beschwerden auslöst. Ein Name allein ergibt noch keinen Plan.</p></div>
+<section class="article-section"><p class="section-meta">Wählen Sie Ihre Frage</p><div class="condition-cards">{cards.map(([title, text, href]) => <a href={href}><span>{title}</span><p>{text}</p><b aria-hidden="true">↗</b></a>)}</div></section>
+<section class="article-section condition-safety"><p class="section-meta">Sicher online</p><h2>Video ist stark, wenn die Frage sicher beantwortbar ist.</h2><p>Wir können Verlauf, Belastung, Bewegungen und Übungstechnik gemeinsam anschauen. Bei starken Unfallfolgen, neurologischen Symptomen, Fieber, deutlicher Schwellung oder Unsicherheit empfehlen wir eine lokale medizinische Abklärung.</p><div class="article-links"><a class="button" href="/kontakt">Kostenloses Orientierungsgespräch</a><a href="/so-funktionierts">So funktioniert es</a><a href="/preise">Preise und Pakete</a></div></section>
+</main></BaseLayout>

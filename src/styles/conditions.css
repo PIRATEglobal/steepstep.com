@@ -1,0 +1,43 @@
+.condition-page { max-width: var(--condition-measure); }
+.condition-page h1 { max-width: 13ch; }
+.condition-answer { max-width: 48rem; border-left: 2px solid var(--mineral); padding: .25rem 0 .25rem 1.25rem; margin: 2.5rem 0 4rem; }
+.condition-answer span,.condition-label,.condition-stance span { color: var(--mineral); text-transform: uppercase; letter-spacing: .1em; font-size: .7rem; font-weight: 600; }
+.condition-answer p { font-family: var(--serif); font-size: clamp(1.55rem, 3vw, 2.35rem); line-height: 1.08; margin: .6rem 0 0; letter-spacing: -.025em; }
+.condition-feature-image { margin-top: 2rem; max-width: 52rem; }
+.condition-feature-image img { aspect-ratio: 3 / 2; object-fit: cover; }
+.condition-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); }
+.condition-cards a { position:relative; min-height:9rem; padding:1.35rem 3rem 1.2rem 1.35rem; background:#fbfaf5; text-decoration:none; transition:background .22s ease, padding .22s ease, transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .22s ease; }
+.condition-cards a:hover { background:#dce6dd; padding-left:1.65rem; color:var(--ink); }
+.condition-cards a:hover { transform:translateY(-2px); box-shadow:0 8px 18px rgba(24,59,58,.1); z-index:1; }
+.condition-cards span { font-family:var(--serif); font-size:1.5rem; line-height:1.05; }
+.condition-cards p { color:var(--ink-soft); font-size:.88rem; margin:.55rem 0 0; }
+.condition-cards b { position:absolute; right:1.25rem; top:1.35rem; color:var(--mineral); font-weight:400; transition:transform .22s ease; }
+.condition-cards a:hover b { transform:translate(2px,-2px); }
+.condition-split { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); margin-bottom:1rem; }
+.condition-panel { padding: 1.8rem; background:var(--paper-deep); }
+.condition-panel--route { background:#e7e0d3; }
+.condition-panel ul,.condition-safety ul,.condition-mistakes { color:var(--ink-soft); padding-left:1.2rem; margin:1rem 0 0; }
+.condition-panel li,.condition-safety li,.condition-mistakes li { padding:.35rem 0; }
+.condition-video { background:var(--ink); color:var(--paper); padding:2.6rem; margin-left:-2.6rem; margin-right:-2.6rem; }
+.condition-video .section-meta,.condition-video p { color:#bdc9c2; }
+.condition-video .section-meta:after { background:#52726b; }
+.condition-video h2 { max-width:17ch; }
+.condition-note { font-size:.86rem; color:var(--warning)!important; border-left:2px solid var(--warning); padding-left:1rem; }
+.condition-phases { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); margin-top:2rem; }
+.condition-phases article { background:#fbfaf5; padding:1.35rem; min-height:15rem; }
+.condition-phases span { color:var(--mineral); text-transform:uppercase; letter-spacing:.09em; font-size:.68rem; font-weight:600; }
+.condition-phases h3 { font-family:var(--serif); font-size:1.45rem; line-height:1.05; font-weight:400; margin:.8rem 0 .7rem; }
+.condition-phases p { font-size:.88rem; margin:0; color:var(--ink-soft); }
+.condition-phases article { transition:background .22s ease, transform .22s cubic-bezier(.2,.7,.2,1); }
+.condition-phases article:hover { background:#eef1e9; transform:translateY(-2px); }
+.condition-safety { background:#ede7da; padding:2.6rem; margin-left:-2.6rem; margin-right:-2.6rem; }
+.condition-safety > p:last-child { max-width:42rem; color:var(--ink-soft); font-size:.92rem; }
+.condition-stance { margin-top:2.5rem; padding:1.5rem; border:1px solid var(--line); background:#fbfaf5; }
+.condition-stance p { margin:.6rem 0 0; color:var(--ink-soft); }
+.condition-sources { font-size:.86rem; }
+.condition-sources ul { padding-left:1.1rem; color:var(--ink-soft); }
+.condition-sources li { padding:.3rem 0; }
+.condition-sources li span { color:var(--ink-soft); font-size:.78rem; }
+@media (max-width:800px) { .condition-split,.condition-phases,.condition-cards { grid-template-columns:1fr; } .condition-video,.condition-safety { margin-left:-1rem; margin-right:-1rem; padding:1.5rem; } .condition-phases article { min-height:auto; } }
+@media (prefers-reduced-motion: reduce) { .condition-cards a,.condition-phases article,.condition-cards b { transition:none; } }
+@media (hover:none) { .condition-cards a:hover,.condition-phases article:hover { transform:none; box-shadow:none; } }

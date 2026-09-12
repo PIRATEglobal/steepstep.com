@@ -1,6 +1,6 @@
 # steepstep.com deployment
 
-This site deploys as static files to All-Inkl over explicit FTPS. The repository root is the current `site/` directory, published as `pirateglobal/steepstep.com`. The workflow is intentionally manual while the public content, legal text, and practice details are being approved.
+This site deploys as static files to All-Inkl over explicit FTPS. The repository root is the Astro project, published as `pirateglobal/steepstep.com`. The workflow is intentionally manual so each production publication is reviewable.
 
 ## Remote boundary
 
@@ -34,7 +34,7 @@ The workflow uses explicit FTPS on port `21`, passive mode, and the tested `secu
 4. Review the build and check jobs before approving.
 5. After FTPS completes, check `https://steepstep.com/` and the generated routes, assets, canonical links, HTTPS, and `robots.txt`.
 
-Pull requests run the check and build job but can never deploy. A push to a branch also cannot deploy. This prevents an unfinished preview from reaching the public domain by accident. The site currently contains preview/noindex gates, so production publication still depends on the content and legal approvals recorded in the site README and website brief.
+Pull requests run the check and build job but can never deploy. A push to a branch also cannot deploy. This prevents an unreviewed change from reaching the public domain by accident. The public routes are indexable and contain no preview publication label. Legal, clinical, pricing, and contact details remain operational facts that the practice owner must keep current.
 
 ## Rollback
 
@@ -42,7 +42,7 @@ Each successful build is retained as a GitHub Actions artifact for 14 days. To r
 
 ## Local verification
 
-From the repository root, which is the `site/` directory in this workspace:
+From the repository root:
 
 ```sh
 npm ci
@@ -58,5 +58,5 @@ No local command in this document connects to All-Inkl. The workflow is the only
 - The `production` environment has required reviewers.
 - The three environment secrets exist and contain verified values.
 - The FTPS account is limited to `/steepstep.com/`.
-- The public practice identity, clinical safety path, privacy notice, terms, prices, contact details, and booking route have been approved.
+- The public practice identity, clinical safety path, privacy notice, terms, prices, contact details, and contact route have been reviewed.
 - A previous artifact or commit is available for rollback.
