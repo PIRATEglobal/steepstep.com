@@ -1,24 +1,24 @@
-.js .section,
-.js .final-cta {
+.js-ready .section:not(.is-visible),
+.js-ready .final-cta:not(.is-visible) {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(14px);
   transition:
     opacity 0.55s ease,
     transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.js .section.is-visible,
-.js .final-cta.is-visible {
+.js-ready .section.is-visible,
+.js-ready .final-cta.is-visible {
   opacity: 1;
   transform: none;
 }
-.js .path-step {
+.js-ready .path-step:not(.is-visible) {
   opacity: 0;
-  transform: translateX(-10px);
+  transform: translateY(10px);
   transition:
     opacity 0.5s ease,
     transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.path-step.is-visible {
+.js-ready .path-step.is-visible {
   opacity: 1;
   transform: none;
 }
@@ -62,9 +62,9 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .js .section,
-  .js .final-cta,
-  .js .path-step {
+  .js-ready .section,
+  .js-ready .final-cta,
+  .js-ready .path-step {
     opacity: 1;
     transform: none;
     transition: none;

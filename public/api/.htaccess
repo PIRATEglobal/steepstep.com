@@ -1,0 +1,11 @@
+Options -Indexes
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+<Files "form-abuse.php">
+  Require all denied
+</Files>
+
+<Files "form-secret.php">
+  Require all denied
+</Files>

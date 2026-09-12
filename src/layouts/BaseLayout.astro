@@ -11,16 +11,19 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f3f0e8" />
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="index, follow" />
     {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="de_CH" />
     <meta property="og:title" content={`${title} · steepstep.com`} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://steepstep.com/images/hero.jpg" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={`${title} · steepstep.com`} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://steepstep.com/images/hero.jpg" />
     <link rel="icon" href="/brand/steepstep-favicon.svg" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({"@context":"https://schema.org","@type":"Organization","name":"steepstep","url":"https://steepstep.com","email":"contact@steepstep.com","legalName":"PIRATE GmbH"})} />
     <title>{title} · steepstep.com</title>
   </head>
   <body>

@@ -1,2 +1,4 @@
+Sitemap: https://steepstep.com/sitemap.xml
+
 User-agent: *
 Disallow:

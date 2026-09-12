@@ -299,6 +299,30 @@ a:hover {
   color: var(--ink-soft);
   max-width: 34rem;
 }
+
+.offer-intro { max-width: 39rem; margin-bottom: 3rem; }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #52726b; }
+.price-card { background: var(--paper); color: var(--ink); padding: clamp(1.5rem, 3vw, 2.5rem); min-height: 27rem; display: flex; flex-direction: column; align-items: flex-start; }
+.price-card--featured { background: #dce6dd; }
+.price-card__label { color: var(--mineral); text-transform: uppercase; letter-spacing: .1em; font-size: .7rem; font-weight: 600; margin: 0 0 2.25rem; }
+.price-card h3 { font-family: var(--serif); font-size: 2.35rem; font-weight: 400; line-height: 1; margin: 0; }
+.price-card .price { font-family: var(--serif); font-size: 2rem; margin: .7rem 0 1.2rem; }
+.price-card > p:not(.price):not(.price-card__label) { color: var(--ink-soft); font-size: .93rem; margin: 0 0 2rem; }
+.price-card .button { margin-top: auto; }
+.offer-footnote { color: #bdc9c2; font-size: .78rem; max-width: 50rem; margin: 1.5rem 0 0; }
+.soft-section { background: var(--paper-deep); }
+.sport-links { border-top: 1px solid var(--line); margin-top: 2.2rem; }
+.sport-links a { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); text-decoration: none; transition: padding .2s ease, color .2s ease; }
+.sport-links a:hover { padding-left: .6rem; color: var(--mineral); }
+.sport-links span { font-family: var(--serif); font-size: 1.45rem; }
+.sport-links small { color: var(--ink-soft); align-self: center; }
+.story-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 5rem; }
+.story-grid .lead-copy { margin-top: 0; }
+.text-link { display: inline-flex; gap: .5rem; margin-top: 1rem; color: var(--ink); font-weight: 600; }
+.text-link span { transition: transform .2s ease; }
+.text-link:hover span { transform: translate(2px, -2px); }
+@media (max-width: 800px) { .pricing-grid { grid-template-columns: 1fr; } .price-card { min-height: auto; } .story-grid { grid-template-columns: 1fr; gap: 2.5rem; } .sport-links a { display: block; } .sport-links small { display: block; margin-top: .2rem; } }
+
 .dark-section {
   background: var(--ink);
   color: var(--paper);
@@ -517,6 +541,11 @@ a:hover {
   color: var(--warning);
   margin-top: 1rem;
 }
+.feature-image { margin: 3rem 0 0; max-width: 34rem; }
+.feature-image--wide { max-width: 52rem; }
+.feature-image img { display: block; width: 100%; height: auto; max-height: 42rem; object-fit: cover; filter: saturate(.8) contrast(.97); }
+.feature-image figcaption { color: var(--ink-soft); font-size: .72rem; margin-top: .65rem; }
+
 .article-page { padding: clamp(4rem, 9vw, 8rem) 0; max-width: 52rem; }
 .article-page h1 { font-family: var(--serif); font-size: clamp(3rem, 7vw, 6rem); line-height: .96; letter-spacing: -.055em; font-weight: 400; max-width: 11ch; margin: 1.2rem 0 2rem; }
 .article-intro { font-size: 1.2rem; line-height: 1.5; max-width: 43rem; color: var(--ink-soft); }

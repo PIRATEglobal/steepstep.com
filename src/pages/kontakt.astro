@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+---
+<BaseLayout title="Kontakt">
+  <header class="site-header"><div class="wrap header-inner">
+    <a class="wordmark" href="/" aria-label="steepstep.com, Startseite"><img src="/brand/steepstep-mark.svg" alt="" width="32" height="32" /><span>steepstep</span><small>.com</small></a>
+    <a class="button button--light" href="/">Zur Startseite</a>
+  </div></header>
+  <main id="inhalt" class="wrap contact-page">
+    <section class="contact-intro" aria-labelledby="contact-title"><p class="section-meta">Kontakt</p><h1 id="contact-title" class="section-heading">Sie möchten etwas klären?</h1><p class="hero-copy">Schreiben Sie uns. Wir lesen Ihre Nachricht persönlich und melden uns so bald wie möglich.</p>
+    <p class="contact-person"><strong>Ihre Ansprechperson</strong><br />Natalja Krol, Physiotherapeutin mit Schwerpunkt Sportphysiotherapie</p></section>
+    <section class="contact-card" aria-labelledby="form-title">
+      <div class="contact-card__intro"><p class="section-meta">Ihre Nachricht</p><h2 id="form-title">Was möchten Sie wissen?</h2><p>Fragen zum Ablauf, zur Eignung oder zum nächsten Schritt sind willkommen.</p><p class="contact-note"><strong>Bitte keine Gesundheitsdaten senden.</strong> Beschreiben Sie hier keine Diagnose, Verletzung oder andere vertrauliche medizinische Angaben. Diese gehören in ein geschütztes Gespräch.</p></div>
+      <form id="contact-form" class="contact-form" action="/api/contact.php" method="post" novalidate>
+        <div class="form-field form-field--trap" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off" /></div>
+        <input type="hidden" name="_token" id="form-token" /><input type="hidden" name="captcha_challenge" id="captcha-challenge" /><input type="hidden" name="form_started" id="form-started" />
+        <div class="form-field"><label for="name">Name <span aria-hidden="true">*</span></label><input id="name" name="name" required maxlength="100" autocomplete="name" /></div>
+        <div class="form-field"><label for="email">E-Mail-Adresse <span aria-hidden="true">*</span></label><input id="email" name="email" type="email" required maxlength="160" autocomplete="email" /></div>
+        <div class="form-field"><label for="message">Ihre Nachricht <span aria-hidden="true">*</span></label><textarea id="message" name="message" required minlength="30" maxlength="4000" rows="7" aria-describedby="message-hint"></textarea><small id="message-hint">Bitte mindestens 30 Zeichen. Keine Diagnose oder Gesundheitsdaten.</small></div>
+        <div class="form-field captcha-field"><label for="captcha-answer"><span id="captcha-question">Rechenaufgabe wird geladen …</span> <span aria-hidden="true">*</span></label><input id="captcha-answer" name="captcha_answer" inputmode="numeric" required maxlength="3" autocomplete="off" /></div>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p><button class="button" type="submit" id="contact-submit">Nachricht senden</button><p class="form-privacy">Mit dem Absenden wird Ihre Nachricht zur Bearbeitung an steepstep übermittelt. <a href="/sicherheit-und-datenschutz">Mehr zum Datenschutz</a>.</p>
+      </form>
+    </section>
+  </main>
+  <style>
+    .contact-page { padding: clamp(4.5rem, 9vw, 8rem) 0; }.contact-intro { max-width: 42rem; margin-bottom: clamp(3rem, 7vw, 6rem); }.contact-intro .hero-copy { max-width: 34rem; } .contact-person { margin-top: 1.5rem; color: var(--ink-soft); font-size: .95rem; }.contact-card { display: grid; grid-template-columns: minmax(0, .8fr) minmax(20rem, 1fr); gap: clamp(2rem, 8vw, 8rem); border-top: 1px solid var(--line); padding-top: 2rem; }.contact-card h2 { margin: .6rem 0 1rem; font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; line-height: 1.05; }.contact-card__intro > p:not(.section-meta) { color: var(--ink-soft); max-width: 28rem; }.contact-note { margin-top: 2.5rem; padding: 1.2rem; border-left: 2px solid var(--warning); font-size: .9rem; }.contact-form { display: grid; gap: 1.1rem; }.form-field { display: grid; gap: .4rem; }.form-field label { font-size: .8rem; font-weight: 600; letter-spacing: .02em; }.form-field input, .form-field textarea { width: 100%; border: 1px solid var(--line); border-radius: 2px; background: #fbfaf5; color: var(--ink); padding: .85rem .9rem; font: inherit; font-size: 1rem; transition: border-color .2s ease, box-shadow .2s ease; }.form-field textarea { resize: vertical; min-height: 9rem; }.form-field input:focus, .form-field textarea:focus { outline: 2px solid transparent; border-color: var(--mineral); box-shadow: 0 0 0 3px rgba(82,114,107,.15); }.form-field small, .form-privacy { color: var(--ink-soft); font-size: .78rem; line-height: 1.45; }.form-privacy { margin: -.2rem 0 0; }.form-privacy a { color: inherit; }.form-status { min-height: 1.5em; margin: .2rem 0 -.2rem; font-size: .9rem; }.form-status.is-error { color: #8a3e31; }.form-status.is-success { color: var(--mineral); }.form-field--trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }.captcha-field { max-width: 12rem; }
+    @media (max-width: 800px) { .contact-card { grid-template-columns: 1fr; gap: 3rem; } }
+  </style>
+  <script>
+    const form = document.querySelector<HTMLFormElement>('#contact-form'); const status = document.querySelector<HTMLParagraphElement>('#form-status'); const submit = document.querySelector<HTMLButtonElement>('#contact-submit'); const started = document.querySelector<HTMLInputElement>('#form-started');
+    const setStatus = (message: string, type: 'error' | 'success' = 'error') => { if (status) { status.textContent = message; status.className = `form-status is-${type}`; } };
+    const loadChallenge = async () => { try { const response = await fetch('/api/token.php?form=contact', { headers: { Accept: 'application/json' } }); if (!response.ok) throw new Error('challenge'); const data = await response.json(); (document.querySelector('#form-token') as HTMLInputElement).value = data.token; (document.querySelector('#captcha-challenge') as HTMLInputElement).value = data.captcha.challenge; const question = document.querySelector('#captcha-question'); if (question) question.textContent = data.captcha.question; } catch { setStatus('Der Spam-Schutz konnte nicht geladen werden. Bitte schreiben Sie uns direkt an contact@steepstep.com.'); } };
+    started!.value = String(Date.now()); loadChallenge();
+    form?.addEventListener('submit', async (event) => { event.preventDefault(); if (!form.reportValidity() || !submit) return; submit.disabled = true; submit.textContent = 'Wird gesendet …'; setStatus(''); try { const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } }); const data = await response.json().catch(() => ({})); if (!response.ok) throw new Error(data.message || 'Die Nachricht konnte nicht gesendet werden.'); form.reset(); started!.value = String(Date.now()); setStatus(data.message || 'Ihre Nachricht wurde gesendet.', 'success'); await loadChallenge(); } catch (error) { setStatus(error instanceof Error ? error.message : 'Die Nachricht konnte nicht gesendet werden.'); } submit.disabled = false; submit.textContent = 'Nachricht senden'; });
+  </script>
+</BaseLayout>
