@@ -120,7 +120,7 @@ jobs:
           umask 077
           test -n "${STEEPSTEP_FORM_SECRET:-}" || { echo "Missing STEEPSTEP_FORM_SECRET" >&2; exit 1; }
           secret_b64="$(printf '%s' "$STEEPSTEP_FORM_SECRET" | base64 | tr -d '\n')"
-          printf '%s\n' '<?php' 'declare(strict_types=1);' "return base64_decode('$secret_b64', true);" > dist/api/form-secret.php
+          printf '%s\n' '<?php' 'declare(strict_types=1);' 'if (basename((string) ($_SERVER["SCRIPT_FILENAME"] ?? "")) === "form-secret.php") { http_response_code(403); exit; }' "return base64_decode('$secret_b64', true);" > dist/api/form-secret.php
           test -s dist/api/form-secret.php
           php -l dist/api/form-secret.php
           php -r '$value = require "dist/api/form-secret.php"; if (!is_string($value) || $value === "") { fwrite(STDERR, "Generated form secret is invalid\n"); exit(1); }'

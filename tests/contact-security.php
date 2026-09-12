@@ -72,5 +72,6 @@ check(strpos($rate_htaccess, 'Deny from all') !== false, 'rate-limit files are n
 $deploy_workflow = file_get_contents(__DIR__ . '/../.github/workflows/deploy.yml');
 check(is_string($deploy_workflow), 'deploy workflow could not be read');
 check(strpos($deploy_workflow, "return base64_decode('\$secret_b64', true);") !== false, 'generated secret decoding contract changed');
+check(strpos($deploy_workflow, 'SCRIPT_FILENAME') !== false, 'generated secret direct-request guard missing');
 
 echo "Contact security checks passed.\n";
