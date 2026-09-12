@@ -106,74 +106,29 @@ jobs:
             exit 1
           fi
 
-      # This is the tested All-Inkl transport used by the existing piratex.com
-      # deployment. All-Inkl's endpoint needs loose certificate verification.
-      # The limitation is recorded in docs/deployment/DEPLOYMENT.md; credentials
-      # stay in the protected production environment.
-      - name: Incremental FTPS deploy (attempt 1)
+      # All-Inkl's endpoint needs loose certificate verification. Upload each
+      # regular file into the exact target path without deleting remote files.
+      - name: Upload static files over FTPS
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        uses: SamKirkland/FTP-Deploy-Action@110f9186c050f71550953127052e77650219c287
-        continue-on-error: true
-        id: deploy_attempt_1
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          security: loose
-          local-dir: ./dist/
-          server-dir: /steepstep.com/
-          dangerous-clean-slate: false
-          state-name: .ftp-deploy-sync-state.json
-
-      - name: Wait before FTPS retry 2
-        if: steps.deploy_attempt_1.outcome == 'failure'
-        run: sleep 30
-
-      - name: Incremental FTPS deploy (attempt 2)
-        if: steps.deploy_attempt_1.outcome == 'failure'
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        uses: SamKirkland/FTP-Deploy-Action@110f9186c050f71550953127052e77650219c287
-        continue-on-error: true
-        id: deploy_attempt_2
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          security: loose
-          local-dir: ./dist/
-          server-dir: /steepstep.com/
-          dangerous-clean-slate: false
-          state-name: .ftp-deploy-sync-state.json
-
-      - name: Wait before FTPS retry 3
-        if: steps.deploy_attempt_1.outcome == 'failure' && steps.deploy_attempt_2.outcome == 'failure'
-        run: sleep 60
-
-      - name: Incremental FTPS deploy (attempt 3, final)
-        if: steps.deploy_attempt_1.outcome == 'failure' && steps.deploy_attempt_2.outcome == 'failure'
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        uses: SamKirkland/FTP-Deploy-Action@110f9186c050f71550953127052e77650219c287
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          security: loose
-          local-dir: ./dist/
-          server-dir: /steepstep.com/
-          dangerous-clean-slate: false
-          state-name: .ftp-deploy-sync-state.json
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            relative="${file#dist/}"
+            case "$relative" in
+              ""|/*|../*|*/../*|*'/..'|*'//'*)
+                echo "Refusing unsafe artifact path: $relative" >&2
+                exit 1
+                ;;
+            esac
+            echo "Uploading $relative"
+            curl --fail --silent --show-error \
+              --ftp-ssl --ftp-pasv --insecure \
+              --ftp-create-dirs \
+              --user "$FTP_USERNAME:$FTP_PASSWORD" \
+              --upload-file "$file" \
+              "ftp://$FTP_SERVER/steepstep.com/$relative"
+          done < <(find dist -type f -print0)

@@ -10,7 +10,7 @@ The only permitted deployment directory is the exact absolute path:
 /steepstep.com/
 ```
 
-The workflow uploads the contents of `dist/` only. It does not upload source files, the repository, dependencies, Astro caches, or documentation. It does not use plain FTP or an SFTP assumption. The action runs in incremental mode with `dangerous-clean-slate: false`, so it never clears the remote directory before upload. Any action-managed sync state is written within the declared target directory only.
+The workflow uploads the contents of `dist/` only. It does not upload source files, the repository, dependencies, Astro caches, or documentation. It does not use plain FTP or an SFTP assumption. The curl uploader writes each regular file in place and never deletes remote files or performs a clean-slate sync.
 
 The FTPS user should be restricted in All-Inkl KAS to this domain directory where the hosting plan allows it. Do not use a main account or a user whose home directory contains other sites.
 
@@ -24,7 +24,7 @@ Create a protected GitHub environment named `production`. Require reviewer appro
 | `FTP_USERNAME` | Domain-scoped FTP username |
 | `FTP_PASSWORD` | Password for that FTP account |
 
-The workflow uses explicit FTPS on port `21` and the tested `security: loose` setting required by the existing All-Inkl deployment. This setting does not verify certificate identity, so the transport limitation is accepted only for this provider endpoint, with credentials scoped to the Steepstep directory and the production environment protected by reviewer approval. Revisit this setting if All-Inkl provides a certificate chain that supports strict verification.
+The workflow uses explicit FTPS on port `21`, passive mode, and the tested `security: loose` equivalent required by the existing All-Inkl deployment. This setting does not verify certificate identity, so the transport limitation is accepted only for this provider endpoint, with credentials scoped to the Steepstep directory and the production environment protected by reviewer approval. Revisit this setting if All-Inkl provides a certificate chain that supports strict verification.
 
 ## Running a deployment
 

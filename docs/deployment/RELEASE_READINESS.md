@@ -43,10 +43,10 @@ GitHub documents that environment secrets are scoped to workflows using that env
 The pushed workflow matches the requested operating model:
 
 - Astro is built from the repository root with `npm ci`, `npm run check`, and `npm run build`.
-- Deployment uses the existing pinned `SamKirkland/FTP-Deploy-Action` commit.
+- Deployment uses the runner's `curl` FTPS client after the pinned action encountered data-socket resets; the transport is explicit FTPS in passive mode with relaxed certificate verification.
 - Transport is explicit FTPS on port `21` with `security: loose`, matching the tested All-Inkl process.
 - The remote directory is the literal `/steepstep.com/`.
-- `dangerous-clean-slate: false` keeps the first deployment from clearing the remote directory.
+- The uploader has no remote delete or clean-slate operation, so existing remote files are preserved.
 - The deployment consumes the build artifact for the same `github.sha` and asserts the checked-out commit matches that SHA.
 
 The pushed `BaseLayout.astro` contains `<meta name="robots" content="noindex, nofollow" />`, and `public/robots.txt` allows crawling. The noindex tag is the effective preview gate until the public launch facts and legal copy are approved. It must be removed or made environment-aware before SEO launch. The workflow itself remains manual-only for publication.
