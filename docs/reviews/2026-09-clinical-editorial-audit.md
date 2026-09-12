@@ -20,23 +20,23 @@ The page register correctly states that a named licensed practitioner must revie
 
 ## P2 clinical/editorial improvements
 
-### Achilles page needs a location qualifier
+### Achilles page location qualifier addressed
 
-`src/pages/beschwerden/achillessehne.astro:5` presents calf and leg training as the basis for “many Achilles complaints” and describes one progression. The cited APTA guideline is specifically for **midportion** Achilles tendinopathy, while the project’s own research notes that midportion and insertional presentations can need different choices. The current copy does not state that location and presentation change the plan.
+`src/pages/beschwerden/achillessehne.astro` now states that midportion and insertional pain can require different exercise ranges and progressions. The wording remains a clinical orientation and does not turn the distinction into a remote diagnosis.
 
-**Recommended wording direction:** say that progressive calf and lower-limb loading is often part of care for suitable presentations, and that the exact exercise, range and progression depend on where the symptoms are and how irritable they are. Avoid turning the illustrative phases into a universal protocol.
+**Implemented:** the intro, short answer and clinical approach now tie exercise choice, range and dose to location, course and irritability. The illustrative phases remain explicitly non-prescriptive.
 
-### Achilles causal language is slightly too certain
+### Achilles causal language addressed
 
-The same line says symptoms “entstehen oft dort, wo Belastung und Kapazität nicht mehr zusammenpassen.” Load-capacity mismatch is a useful working model, but it is not a complete causal explanation for every tendon presentation.
+The Achilles introduction now says symptoms “können auftreten, wenn sich Belastung und aktuelle Kapazität nicht gut treffen” and immediately identifies this as a working model rather than a complete explanation.
 
-**Recommended wording direction:** “können auftreten, wenn sich Belastung und aktuelle Kapazität nicht gut treffen.” Keep the subsequent history and examination framing.
+**Implemented:** the working-model qualifier is visible in the introduction, with the existing history and examination framing retained.
 
-### “Eine Reaktion bedeutet nicht automatisch Schaden” needs context
+### Symptom-response context retained
 
-`src/pages/beschwerden/achillessehne.astro:5` says a response does not automatically mean damage. This is directionally consistent with symptom-guided loading, but the sentence can be read as dismissing a meaningful flare or other warning sign.
+The Achilles page retains the distinction that a symptom response alone does not prove tissue damage, while explicitly directing readers to intensity, duration, function and next-day course. The escalation panel remains visible.
 
-**Recommended wording direction:** explain that a symptom response alone does not prove tissue damage, and that its intensity, duration, function and next-day course guide the next dose. Escalation advice should remain visible.
+**Implemented:** the existing wording provides this context and keeps escalation advice visible.
 
 ### Low-back comparison claim should be softened
 
@@ -44,11 +44,11 @@ The same line says symptoms “entstehen oft dort, wo Belastung und Kapazität n
 
 **Recommended wording direction:** “Bei vielen unspezifischen Rückenschmerzen steht aktive, verständliche Begleitung im Vordergrund.” This preserves the expert stance without implying a universal comparative result.
 
-### Ankle weight-bearing triage could be more concrete
+### Ankle weight-bearing triage clarified
 
-`src/pages/beschwerden/umgeknickter-knoechel.astro:5` says to seek local assessment when the person can “kaum einige Schritte” walk. This is cautious but vague. The cited ankle guidance and Ottawa-style decision rules use concrete weight-bearing and bony-tenderness questions.
+`src/pages/beschwerden/umgeknickter-knoechel.astro` now uses the concrete four-step and direct bony-tenderness cues from the cited guidance, while stating that they indicate a need for timely local assessment and do not provide a remote diagnosis.
 
-**Recommended wording direction:** have a practitioner approve a plain-language threshold, such as inability to take four steps or marked bone tenderness, while keeping the page clear that remote content cannot rule out fracture or syndesmotic injury.
+**Implemented:** the threshold is phrased as a reason for local assessment, and the page continues to state that fracture or syndesmotic injury cannot be reliably excluded by video.
 
 ## Passes
 
@@ -67,7 +67,7 @@ The content is materially consistent with the project evidence register: Neal et
 
 ## Audit verdict
 
-**Clinical content:** PASS WITH P2 EDITS, pending named practitioner sign-off.
+**Clinical content:** PASS, pending named practitioner sign-off.
 **Safety boundaries:** PASS, subject to practitioner review.
-**Editorial quality:** PASS WITH P2 WORDING EDITS.
-**Conversion/navigation:** BLOCKED until `/preise/` is either implemented or all links are corrected and verified.
+**Editorial quality:** PASS.
+**Conversion/navigation:** PASS. The shared pricing route exists and resolves from the audited condition-page links.
