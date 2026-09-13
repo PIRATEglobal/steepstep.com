@@ -26,6 +26,8 @@ until curl -fsS "http://127.0.0.1:${php_port}/api/token.php?form=contact" \
   sleep 0.1
 done
 
-npm exec -- astro dev --host 127.0.0.1 --port "${astro_port}" &
+# Astro auto-backgrounds under agent runners. Keep it in this supervisor so the
+# PHP companion remains alive for the full local preview session.
+ASTRO_DEV_BACKGROUND=0 npm exec -- astro dev --host 127.0.0.1 --port "${astro_port}" &
 astro_pid=$!
 wait "${astro_pid}"
