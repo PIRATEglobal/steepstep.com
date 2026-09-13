@@ -19,7 +19,7 @@ const complaints = [
       <a class:list={{ active: isActive('/preise') }} href="/preise">Preise</a>
       <a class:list={{ active: isActive('/sport') }} href="/sport">Sport &amp; Bewegung</a>
       <details class="nav-group">
-        <summary class:list={{ active: isActive('/beschwerden') }}>Beschwerden<span class="nav-chevron" aria-hidden="true">⌄</span></summary>
+        <summary class:list={{ active: isActive('/beschwerden') }}>Beschwerden<span class="nav-chevron" aria-hidden="true"></span></summary>
         <div class="nav-submenu">
           <a href="/beschwerden">Alle Beschwerden</a>
           {complaints.map(([href, label]) => <a class:list={{ active: isActive(href) }} href={href}>{label}</a>)}

@@ -6,6 +6,10 @@ How to use it: when you learn something durable, a bug and its fix, a project co
 
 ## Lessons
 
+- **Image motion must keep animation and hover on separate properties.** Shared imagery uses the individual `scale` property for its slow breathing animation, leaving `transform` available for pointer hover without cascade conflicts; reduced motion disables both.
+- **Navigation carets need geometric alignment.** The Beschwerden disclosure uses a CSS border chevron instead of a Unicode glyph so its optical baseline stays aligned across fonts and viewport sizes.
+- **Image entrance tilt belongs to reveal, not the loop.** Feature and proof wrappers use a single sub-degree rotate-and-settle transform during IntersectionObserver reveal, then stay level; this preserves a calm surface and avoids continuous motion.
+
 - **Client messaging is private by design.** Never publish messenger accounts or invite unsolicited messages. Describe the protected, pre-agreed communication route only as a benefit for active programme clients between appointments; route public enquiries through the protected form.
 
 - **Shared outer geometry, focused reading measures.** Keep all route openings on `--outer-measure` and use narrower inner text/image measures only when line length or visual focus requires it. Explain the choice in the design record.
