@@ -11,12 +11,11 @@ Maintain and release the Swiss-first steepstep online physiotherapy site.
 - Astro 7 static site deployed by GitHub Actions over All-Inkl FTPS with `security: loose`, exact remote target `/steepstep.com/`.
 - Public site is Swiss Standard German, private pay, and must contain no preview or unfinished-status wording. All pages share the same header, footer and outer content measure.
 - Public enquiries use the protected contact form and `contact@steepstep.com`; no messenger accounts or unsolicited-message invitations are published. Active programme clients may use the protected route agreed before purchase between appointments.
-- Current release gate: static build and content checks are being re-run after the navigation, FAQ, legal and communication updates. The last live API smoke test recorded HTTP 500 for `/api/token.php` and `/api/form-secret.php`; verify the generated secret and PHP runtime before enabling form submissions.
+- Current release gate: local Astro check and production build pass with zero diagnostics. The live contact token returns HTTP 200 with a challenge, foreign origins return 403, invalid submissions return 400, and direct secret access returns 403 with an empty body. A fresh browser reload of `https://steepstep.com/kontakt/` also loads the spam challenge without an error. Production mailbox receipt and the responsive keyboard/reduced-motion viewport matrix remain unverified.
 
 ## Next Session
-- Re-run `npm run check`, `npm run build`, contact security tests, route/link sweeps and forbidden-language scan with the current working tree.
-- Review the shared header at 360, 390, 768, 850, 1024 and 1440px, including readable CTA text, mobile menu, keyboard focus and reduced motion.
-- Review the live contact endpoints after deployment, confirming only `/steepstep.com/` is written remotely.
+- Practitioner, legal, image-rights and mailbox follow-ups remain external confirmations. The required narrow viewport, keyboard and reduced-motion checks also remain open because the browser viewport override did not apply.
+- After the authorised publish, verify the GitHub Actions run and representative live routes, confirming the exact `/steepstep.com/` target.
 
 ---
 
