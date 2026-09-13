@@ -27,17 +27,20 @@ import '../../styles/global.css';
   .sport-context-grid article, .sport-outputs article { background:var(--paper); padding:1.35rem; min-height:8.5rem; }
   .sport-context-grid span, .sport-outputs span, .guide-grid span { color:var(--mineral); font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; font-weight:600; }
   .sport-context-grid p, .sport-outputs p { margin:.75rem 0 0; color:var(--ink-soft); font-size:.94rem; }
-  .guide-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:2rem; background:var(--line); border:1px solid var(--line); }
+  .guide-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:1px; margin-top:2rem; background:var(--line); border:1px solid var(--line); }
   .guide-grid a { display:flex; flex-direction:column; min-height:12rem; padding:1.35rem; background:var(--paper); text-decoration:none; transition:background .22s ease, transform .22s cubic-bezier(.2,.7,.2,1); }
+  .guide-grid a:nth-child(-n+3) { grid-column:span 2; }
+  .guide-grid a:nth-child(n+4) { grid-column:span 3; }
   .guide-grid a:hover, .guide-grid a:focus-visible { background:var(--paper-deep); color:var(--ink); transform:translateY(-2px); }
   .guide-grid small { margin-top:.85rem; color:var(--ink-soft); font-size:.88rem; line-height:1.45; }
   .guide-grid b { margin-top:auto; padding-top:1rem; font-size:.84rem; font-weight:600; }
+  .sport-outputs { grid-template-columns:repeat(3,1fr); }
   .sport-load { border-top:1px solid var(--line); }
   .load-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:2rem; background:var(--line); border:1px solid var(--line); }
   .load-grid article { background:var(--paper); padding:1.35rem; min-height:9rem; }
   .load-grid span { color:var(--mineral); font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; font-weight:600; }
   .load-grid p { margin:.8rem 0 0; color:var(--ink-soft); font-size:.94rem; }
   .sport-boundary { max-width:48rem; margin-top:2rem; padding-left:1rem; border-left:2px solid var(--warning); color:var(--ink-soft); }
-  @media (max-width:800px) { .framework-grid, .sport-context-grid, .sport-outputs, .guide-grid { grid-template-columns:1fr; } .guide-grid a { min-height:auto; } }
+  @media (max-width:800px) { .framework-grid, .sport-context-grid, .sport-outputs, .guide-grid { grid-template-columns:1fr; } .guide-grid a { grid-column:auto; min-height:auto; } }
   @media (max-width:800px) { .load-grid { grid-template-columns:1fr; } .load-grid article { min-height:auto; } }
 </style>
